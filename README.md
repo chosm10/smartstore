@@ -1,3 +1,4 @@
+# 2020.12.21 빗버킷 이관 완료
 # Naver Smart Store Crawling
 ## 파이썬 버젼 3.X 설치
 ## 실행 방법
