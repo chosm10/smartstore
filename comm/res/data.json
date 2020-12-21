@@ -1,0 +1,130 @@
+{
+    "파트너스퀘어":"//*[@id='seller-content']/div/div/div/div[1]/ncp-manager-notice-view/ng-transclude/button",
+    "이용정지":"/html/body/div[1]/div/div/div[1]/button",
+    "고객센터닫기":"/html/body/div[2]/div/div/div[3]/div/div/button",
+    "고객센터닫기확인":"/html/body/div[1]/div/div/div[2]/div/span[2]/button",
+    "driver":"C:/Users/Administrator/Desktop/chromedriver_win32/",
+    "storeLink":["https://nid.naver.com/nidlogin.login?url=https%3A%2F%2Fsell.smartstore.naver.com%2F%23%2FnaverLoginCallback%3Furl%3Dhttps%253A%252F%252Fsell.smartstore.naver.com%252F%2523", "https://sell.smartstore.naver.com/#/login"],
+    "mainLogin":"/html/body/ui-view[1]/div[2]/div[2]/div/div[1]/div[2]/a[2]",
+    "idLogin":"/html/body/ui-view[1]/div[3]/div/div/div/form/div[1]/ul/li[2]/a",
+    "members":{
+        "gimpo":["hgimpo", "hrlavh2020*"],
+        "ddp":["sonpolar", "naverddp0004"],
+        "songdo":["songdo2736", "songdo2736+"],
+        "gasan":["hallaonline1", "!!@@1q2w3e4r5t"],
+        "daeguOut":["hda1848881", "1231q2w3e4r5t*"],
+        "mia":["thehyundai_tj", "aldkwja14*"],
+        "decube":["decube2019", "decube2019!"],
+        "garden":["hdgd5", "guseo212!"]
+    },
+    "idBox":["/html/body/div[2]/div[3]/div/form/fieldset/div[1]/div[1]/span/input", "//*[@id='loginId']"],
+    "pwdBox":["/html/body/div[2]/div[3]/div/form/fieldset/div[2]/div[1]/span/input", "//*[@id='loginPassword']"],
+    "lastLogin":["/html/body/div[2]/div[3]/div/form/fieldset/input", "//*[@id='loginButton']"],
+    "isLogin":"//*[@id='_gnb_nav']/div/ul[1]/li[2]/a",
+    "notReg":"/html/body/div[1]/div[2]/div/form/fieldset/span[1]/a",
+    "imgPath":"C:/Users/Administrator/Desktop/capture/",
+    "logPath":"C:/Users/Administrator/Desktop/log/storeLog.log",
+    "workFileName":{
+        "gimpo":"brands_gimpo.csv",
+        "ddp":"brands_ddp.csv",
+        "songdo":"brands_songdo.csv",
+        "garden":"brands_garden.csv",
+        "daeguOut":"brands_daeguOut.csv",
+        "gasan":"brands_gasan.csv",
+        "decube":"brands_decube.csv",
+        "mia":"brands_mia.csv"
+    },
+    "email":{
+        "gimpo":"youseon94@thehyundai.com",
+        "ddp":"hcd00238d2@hyundaihmall.com",
+        "songdo":"hda10936sd8@thehyundai.com",
+        "garden":"hda00483dd@thehyundai.com",
+        "daeguOut":"hda00946yu@thehyundai.com",
+        "gasan":"hoa40656gs1@thehyundai.com",
+        "decube":"hd00059dc1@thehyundai.com",
+        "mia":"hda13905hm1@thehyundai.com"
+    },
+    "emailText":{
+        "naverdaily":"※ 파일 추출경로<br>1. Delivery.xlsx : 판매관리 > 발주/발송관리 > 조회조건값 : 발송처리일 > 기간 : 1주일<br>2. Return.xlsx : 판매관리 > 반품관리 > 조회조건값 : 반품요청일 > 기간 : 3개월 > 처리상태 : 반품완료<br>3. Cancle.xlsx : 판매관리 > 취소관리 > 조회조건값 : 클레임요청일 > 기간 : 3개월 > 처리상태 : 취소완료<br>4. Report.csv : 웹사이트상 오류로 인해, 로봇이 작업을 수행하지 못한 브랜드 내역입니다.<br>여기에 기록된 브랜드는 수기로 추출을 진행해야합니다.<br>해당 파일은 주 6회(월~토)에 전달될 예정입니다.<br>",
+        "naverpurchase":"※ 파일 추출경로<br>1. Decision.xlsx : 판매관리 > 구매확정내역 > 조회조건값 : 구매확정일 > 기간 : 1주일<br>2. Pay.xlsx : 판매관리 > 구매확정내역 > 조회조건값 : 결제일 > 기간 : 1주일<br>3. Report.csv : 웹사이트상 오류로 인해, 로봇이 작업을 수행하지 못한 브랜드 내역입니다.<br>여기에 기록된 브랜드는 수기로 추출을 진행해야합니다.<br>해당 파일은 주 1회(월)에 전달될 예정입니다.<br>",
+        "naversettle":"네이버 정산 입니다."
+    },
+    "moveStore":"//*[@id='_gnb_nav']/ul/li[2]/a",
+    "dataCnt": "//*[@id='__app_root__']/div/div[2]/div[3]/div[1]/h3/b",
+    "url":{
+        "naverdaily":{
+            "cancle":"https://sell.smartstore.naver.com/#/naverpay/claim/cancel",
+            "return":"https://sell.smartstore.naver.com/#/naverpay/claim/return",
+            "delivery":"https://sell.smartstore.naver.com/#/naverpay/sale/delivery"
+        }, 
+        "naverpurchase":{
+            "decision":"https://sell.smartstore.naver.com/#/naverpay/sale/purchaseDecision"
+        },
+        "naversettle":{
+            "scheduled":"https://sell.smartstore.naver.com/#/naverpay/settlemgt/sellerdailysettle",
+            "finish":"https://sell.smartstore.naver.com/#/naverpay/settlemgt/sellerdailysettle",
+            "standard":"https://sell.smartstore.naver.com/#/naverpay/settlemgt/sellerdailysettle"
+        }
+    },
+    "cancle":{
+        "searchRange":"//*[@id='__app_root__']/div/div[2]/div[2]/div[1]/table/tbody/tr[1]/td/div[1]/div[2]/div/ul/li[4]/button",
+        "processStatus": "//*[@id='__app_root__']/div/div[2]/div[2]/div[1]/table/tbody/tr[3]/td/div/select",
+        "search":"//*[@id='__app_root__']/div/div[2]/div[2]/div[2]/button",
+        "checkList": "//*[@id='__app_root__']/div/div[2]/div[3]/div[3]/div[1]/div[2]/div[1]/div[1]/div[2]/div/div[1]/table/tbody/tr[1]/td[2]/div/a",
+        "download": "//*[@id='__app_root__']/div/div[2]/div[3]/div[1]/div/button"
+    },
+    "return":{
+        "searchRange":"//*[@id='__app_root__']/div/div[2]/div[2]/div[1]/table/tbody/tr[1]/td/div[1]/div[2]/div/ul/li[4]/button",
+        "processStatus": "//*[@id='__app_root__']/div/div[2]/div[2]/div[1]/table/tbody/tr[3]/td/div/select",
+        "search":"//*[@id='__app_root__']/div/div[2]/div[2]/div[2]/button",
+        "checkList": "//*[@id='__app_root__']/div/div[2]/div[3]/div[3]/div[1]/div[2]/div[1]/div[1]/div[2]/div/div[1]/table/tbody/tr[1]/td[2]/div/a",
+        "download": "//*[@id='__app_root__']/div/div[2]/div[3]/div[1]/div/button"
+    },
+    "delivery":{
+        "searchRange":"//*[@id='__app_root__']/div/div[2]/div[2]/div[1]/table/tbody/tr[1]/td/div[1]/div[1]/div/select",
+        "search":"//*[@id='__app_root__']/div/div[2]/div[2]/div[2]/button",
+        "checkList": "//*[@id='__app_root__']/div/div[2]/div[3]/div[4]/div[1]/div[2]/div[1]/div[1]/div[2]/div/div[1]/table/tbody/tr[1]/td[2]/div/a",
+        "download": "//*[@id='__app_root__']/div/div[2]/div[3]/div[1]/div/button[3]"
+    },
+    "decision":{
+        "processStatus":"//*[@id='__app_root__']/div/div[2]/div[2]/div[1]/table/tbody/tr[1]/td/div[1]/div[1]/div/select",
+        "search":"//*[@id='__app_root__']/div/div[2]/div[2]/div[2]/button",
+        "checkList": "//*[@id='__app_root__']/div/div[2]/div[3]/div[3]/div[1]/div[2]/div[1]/div[1]/div[2]/div/div[1]/table/tbody/tr[1]/td[2]/div/a",
+        "download":"//*[@id='__app_root__']/div/div[2]/div[3]/div[1]/div/button[2]"
+    },
+    "scheduled":{
+        "start":"//*[@id='startDate']/input",
+        "end":"//*[@id='endDate']/input",
+        "search":"//*[@id='searchForm']/div[3]/button[1]",
+        "download":"//*[@id='content']/div/div[2]/div[8]/div[1]/div/button[2]",
+        "data":"//*[@id='content']/div/div[2]/div[8]/div[2]/div[2]/table/tbody/tr/td/span",
+        "moveButton":"//*[@id='content']/div/ul/li[1]/a"
+    },
+    "finish":{
+        "processStatus":"//*[@id='periodType']",
+        "start":"//*[@id='startDate']/input",
+        "end":"//*[@id='endDate']/input",
+        "search":"//*[@id='searchForm']/div[3]/button[1]",
+        "download":"//*[@id='content']/div/div[2]/div[9]/div[1]/div/button[1]",
+        "data":"//*[@id='content']/div/div[2]/div[8]/div[2]/div[2]/table/tbody/tr/td/span",
+        "moveButton":"//*[@id='content']/div/ul/li[2]/a"
+    },
+    "standard":{
+        "processStatus":"//*[@id='periodType']",
+        "start":"//*[@id='startDate']/input",
+        "end":"//*[@id='endDate']/input",
+        "search":"//*[@id='searchForm']/div[3]/button[1]",
+        "download":"//*[@id='content']/div/div[2]/div[9]/div[1]/div/button[1]",
+        "data":"//*[@id='content']/div/div[2]/div[9]/div[2]/div[2]/table/tbody/tr/td/span",
+        "moveButton":"//*[@id='content']/div/ul/li[2]/a"
+    },
+    "statusList":{ 
+        "cancle":"취소완료",
+        "return":"반품완료",
+        "delivery":"발주발송(발송처리일)",
+        "decision":["구매확정일", "결제일"],
+        "scheduled":"정산예정일",
+        "standard":"정산기준일",
+        "finish":"정산완료일"
+    }
+}
