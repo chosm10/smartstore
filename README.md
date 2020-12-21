@@ -36,4 +36,3 @@
 - brands_점포명.csv 생성 -> data.json 파일의 members에 계정 정보 추가 and workFileName에 해당 점포가 사용할 브랜드리스트명 추가 ->   
 - ```python brandList.py 점포명``` 으로 brands.csv에 해당 점포의 브랜드 리스트 받기 -> brands.csv 내용을 해당 점포 브랜드 리스트에 복사 / 붙여넣기 
 ## 배치파일 생성 및 실행 방법
-## git pull test
