@@ -48,6 +48,7 @@ if __name__ == '__main__':
     day = "{}{}{}".format(api.getYear(), api.getMonth(), api.getDay())
     files = [r"{}\log\{}{}".format(downPath_win, day, "_Report.csv")]
     line = 0
+    msg = naver.data["emailText"][task]
     for dir in dirs:
         # 웹메일에서 첨부 메일명에 한글이 포함되면 첨부가 되지 않아서 영어 이름으로 매칭
         filename = r"{}\{}_{}_{}.xlsx".format(downPath_win, day, shop, fnames[dir])
@@ -57,14 +58,25 @@ if __name__ == '__main__':
         except Exception:
             naver.adminLog.error("{}파일 정상적으로 생성 실패".format(dir))
         naver.setDRM(filename)
-        files.append(filename)
+        isFileExist = False
+        try:
+            isFileExist = os.path.isfile(filename)
+        except Exception as e:
+            naver.adminLog.error("네이버 일매출정리 {}파일이 존재하지 않음 | {}".format(filename, e))
+
+        # 파일이 정상적으로 생성되어 존재하면, 결과파일 메일에 첨부 파일명 등록
+        if isFileExist:
+            files.append(filename)
+        else:
+        # 파일이 존재하지 않으면 결과파일 메일 내용에 기재
+            msg = "<br>◈{}{}파일이 정상적으로 생성되지 못하였습니다!!! <br>".format(msg, fnames[dir])
 
     # 메일 수신처 설정
     to = ["chosm10@hyundai-ite.com", "cindy@hyundaihmall.com", "move@hyundai-ite.com"]
     to.append(naver.data["email"][shop])
 
     try:
-        mail.sendmail(to, "({}) 네이버 구매확정_{}".format(day, shop), naver.data["emailText"][task], files)
+        mail.sendmail(to, "({}) 네이버 구매확정_{}".format(day, shop), msg, files)
         naver.adminLog.info("네이버 구매확정 메일 정상 발송 완료")
     except Exception as e:
         naver.adminLog.error("네이버 구매확정 메일 정상 발송 실패 | {}".format(e))

@@ -76,7 +76,7 @@ if __name__ == '__main__':
             files.append(filename)
         else:
         # 파일이 존재하지 않으면 결과파일 메일 내용에 기재
-            msg = "{}{}파일이 정상적으로 생성되지 못하였습니다. <br>".format(msg, fnames[dir])
+            msg = "<br>◈{}{}파일이 정상적으로 생성되지 못하였습니다!!! <br>".format(msg, fnames[dir])
 
     # 메일 수신처 설정
     to = ["chosm10@hyundai-ite.com", "cindy@hyundaihmall.com", "move@hyundai-ite.com"]
