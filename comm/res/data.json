@@ -84,7 +84,7 @@
         "searchRange":"//*[@id='__app_root__']/div/div[2]/div[2]/div[1]/table/tbody/tr[1]/td/div[1]/div[1]/div/select",
         "search":"//*[@id='__app_root__']/div/div[2]/div[2]/div[2]/button",
         "checkList": "//*[@id='__app_root__']/div/div[2]/div[3]/div[4]/div[1]/div[2]/div[1]/div[1]/div[2]/div/div[1]/table/tbody/tr[1]/td[2]/div/a",
-        "download": "//*[@id='__app_root__']/div/div[2]/div[3]/div[1]/div/button[3]"
+        "download": "//*[@id='__app_root__']/div/div[2]/div[3]/div[1]/div/button[2]"
     },
     "decision":{
         "processStatus":"//*[@id='__app_root__']/div/div[2]/div[2]/div[1]/table/tbody/tr[1]/td/div[1]/div[1]/div/select",
