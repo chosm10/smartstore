@@ -231,4 +231,4 @@ def detailJob(pid, driver, store, status):
         return
 
     # 여기 오면 파일이 정상 다운된 상황    
-    naver.moveFile(pid, driver, task, "{}{}".format(downPath, pid), downPath, store, {"반품관리":"반품완료", "취소관리":"취소완료", "전체주문조회":"발주발송(발송처리일)"})
+    naver.moveFile(pid, driver, task, "{}{}".format(downPath, pid), downPath, store, {"반품관리":"반품완료", "취소관리":"취소완료", "전체주문":"발주발송(발송처리일)"})

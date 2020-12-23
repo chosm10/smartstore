@@ -298,7 +298,7 @@ def downloadCheck(path, keywords):
                 return isDownOk
     return -1
 
-# fNameDict -> {"반품관리": "반품완료", "취소관리": "취소완료", "전체주문조회": "발주발송(발송처리일)" ...}
+# fNameDict -> {"반품관리": "반품완료", "취소관리": "취소완료", "전체주문": "발주발송(발송처리일)" ...}
 def moveFile(pid, driver, task, src, downPath, store, fNameDict):
     try:
         for fname in os.listdir(src):
