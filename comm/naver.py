@@ -83,6 +83,8 @@ def initProcess(downPath, downPath_win, shop, stores):
 
     # 로그인 화면이 "네이버 아이디 로그인"이면 0, "판매자 아이디 로그인" 이면 1
     loginSelect = 0
+    if shop == "donggu":
+        loginSelect = 1
 
     # 네이버 스마트 스토어 접속
     openStore(pid, driver, data["storeLink"][loginSelect])
