@@ -394,7 +394,7 @@ def openStore(pid, driver, link):
 # 여기에 걸리면 한 프로세서 자체가 일을 못한것이므로 해당 일감 전체 수기 다운 필요
 def doExcept(pid, store, driver, msg, e):
     cancleAlert(pid, driver)
-    userLog.info("{} 3건(반품, 취소, 발주발송)".format(store))
+    userLog.info("{} 관련 모든 업무".format(store))
     adminLog.error("PID: {} | {} | {}".format(pid, msg, e))
     api.capture(pid, driver, r"{}\{}".format(downPath_win,"screenshot"))
 
