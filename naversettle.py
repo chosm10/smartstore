@@ -76,7 +76,7 @@ if __name__ == '__main__':
             msg = "<br>◈{}{}파일이 정상적으로 생성되지 못하였습니다!!! <br>".format(msg, fnames[dir])
 
     # 메일 수신처 설정
-    to = ["chosm10@hyundai-ite.com"]
+    to = ["chosm10@hyundai-ite.com", "cindy@hyundaihmall.com", "move@hyundai-ite.com"]
     to.append(naver.data["email"][shop])
 
     last_month = api.getLastDate()[0].split(".")[1]
