@@ -57,6 +57,15 @@ def getLastDate():
     start = last_month.strftime("%Y.%m.%d")
     return start, end
 
+# 정산작업에서 익월 시작일, 15일 반환
+def getLastDate():
+    today = date.today()
+    this_month = today.replace(day=1)
+    start = this_month.strftime("%Y.%m.%d")
+    this_month = today.replace(day=15)
+    end = this_month.strftime("%Y.%m.%d")
+    return start, end
+
 # 브랜드명이 적힌 파일을 읽어와서 프로세스별로 일감분리
 def divideWork(filename, partition):
     f = open(filename, 'r', encoding='CP949')
