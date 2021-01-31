@@ -58,7 +58,7 @@ def getLastDate():
     return start, end
 
 # 정산작업에서 익월 시작일, 15일 반환
-def getLastDate():
+def getHalfDate():
     today = date.today()
     this_month = today.replace(day=1)
     start = this_month.strftime("%Y.%m.%d")

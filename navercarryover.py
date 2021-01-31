@@ -162,7 +162,7 @@ def detailJob(pid, driver, store, status):
             naver.storeExcept(pid, driver, task, "{} 글자 선택 실패".format(text[status]))
             return                
     searchDate = {"start": "", "end": ""}
-    searchDate["start"], searchDate["end"] = api.getLastDate()
+    searchDate["start"], searchDate["end"] = api.getHalfDate()
 
     #조회 시작일, 종료일 설정
     for date in searchDate:
