@@ -141,7 +141,7 @@ def detailJob(pid, driver, store, status):
         naver.log(pid, "정산내역 이동 버튼 클릭 성공")
     except Exception as e:
         # 인식 안될 경우 앞에서 팝업창 때문에 홈페이지 이동이 안된 것이므로 작업 종료하고 다음 작업 진행
-        naver.storeExcept(pid, driver, "naversettle", "정산내역 이동 버튼 클릭 실패 | {}".format(e))
+        naver.storeExcept(pid, driver, task, "정산내역 이동 버튼 클릭 실패 | {}".format(e))
         return
 
     naver.delay(3)
