@@ -66,7 +66,7 @@ if __name__ == '__main__':
         try:
             isFileExist = os.path.isfile(filename)
         except Exception as e:
-            naver.adminLog.error("네이버 정산 {}파일이 존재하지 않음 | {}".format(filename, e))
+            naver.adminLog.error("네이버 외상매출금 {}파일이 존재하지 않음 | {}".format(filename, e))
 
         # 파일이 정상적으로 생성되어 존재하면, 결과파일 메일에 첨부 파일명 등록
         if isFileExist:
@@ -77,14 +77,14 @@ if __name__ == '__main__':
 
     # 메일 수신처 설정
     to = ["chosm10@hyundai-ite.com", "cindy@hyundaihmall.com", "move@hyundai-ite.com"]
-    # to.append(naver.data["email"][shop])
+    to.append(naver.data["email"][shop])
 
     month = api.getHalfDate()[0].split(".")[1]
     try:
-        mail.sendmail(to, "({}) {}월 네이버 이월매출금_{}".format(day, month, shop), msg, files)
-        naver.adminLog.info("네이버 이월매출금 메일 정상 발송 완료")
+        mail.sendmail(to, "({}) {}월 네이버 외상매출금_{}".format(day, month, shop), msg, files)
+        naver.adminLog.info("네이버 외상매출금 메일 정상 발송 완료")
     except Exception as e:
-        naver.adminLog.error("네이버 이월매출금 메일 정상 발송 실패 | {}".format(e))
+        naver.adminLog.error("네이버 외상매출금 메일 정상 발송 실패 | {}".format(e))
 
     api.taskkill()
 
