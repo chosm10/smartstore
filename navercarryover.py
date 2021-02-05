@@ -79,9 +79,9 @@ if __name__ == '__main__':
     to = ["chosm10@hyundai-ite.com", "cindy@hyundaihmall.com", "move@hyundai-ite.com"]
     # to.append(naver.data["email"][shop])
 
-    last_month = api.getLastDate()[0].split(".")[1]
+    month = api.getHalfDate()[0].split(".")[1]
     try:
-        mail.sendmail(to, "({}) {}월 네이버 이월매출금_{}".format(day, last_month, shop), msg, files)
+        mail.sendmail(to, "({}) {}월 네이버 이월매출금_{}".format(day, month, shop), msg, files)
         naver.adminLog.info("네이버 이월매출금 메일 정상 발송 완료")
     except Exception as e:
         naver.adminLog.error("네이버 이월매출금 메일 정상 발송 실패 | {}".format(e))
