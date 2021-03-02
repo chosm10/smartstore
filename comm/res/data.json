@@ -17,14 +17,14 @@
         "decube":["decube2019", "guseoelzbqm1"],
         "garden":["hdgd5", "whdgur1@"],
         "head":["tkyoon86", "`1q2w3e4r5t"],
-        "muyeog":["hanmu12345", "asdf1234!!!!"],
+        "muyeog":["hanmu12345", "hd_tradecenter"],
         "chunho":["chunho8781", "dlzjajtm1"],
         "sinchon":["sinchonwindow", "tlschs1#"],
         "mdong":["hmokdongonline", "mokdong1."],
         "jdong":["jdonline", "1q2w3e4r5t@"],
         "kintex":["kintexb2f", "kintex0++"],
         "busan":["h-busan", "dbsxorb0-="],
-        "ulsan":["boda_mi", "dnftkswja1!!"],
+        "ulsan":["boda_mi", "dnftkswja1@@"],
         "donggu":["365hdpt@naver.com", "tkfkdgo4$"],
         "daegu":["daegu3500", "eornwja357!"],
         "cchung":["ec40450", "chung1**"],
@@ -84,11 +84,11 @@
         "pangyo":"hda00088hg5@thehyundai.com"
     },
     "emailText":{
-        "naverdaily":"※ 파일 추출경로<br>1. Delivery.xlsx : 판매관리 > 발주/발송관리 > 조회조건값 : 발송처리일 > 기간 : 1주일<br>2. Return.xlsx : 판매관리 > 반품관리 > 조회조건값 : 반품요청일 > 기간 : 3개월 > 처리상태 : 반품완료<br>3. Cancle.xlsx : 판매관리 > 취소관리 > 조회조건값 : 클레임요청일 > 기간 : 3개월 > 처리상태 : 취소완료<br>4. Report.csv : 웹사이트상 오류로 인해, 로봇이 작업을 수행하지 못한 브랜드 내역입니다.<br>여기에 기록된 브랜드는 수기로 추출을 진행해야합니다.<br>해당 파일은 주 6회(월~토)에 전달될 예정입니다.<br>",
-        "naverpurchase":"※ 파일 추출경로<br>1. Decision.xlsx : 판매관리 > 구매확정내역 > 조회조건값 : 구매확정일 > 기간 : 1주일<br>2. Pay.xlsx : 판매관리 > 구매확정내역 > 조회조건값 : 결제일 > 기간 : 1주일<br>3. Report.csv : 웹사이트상 오류로 인해, 로봇이 작업을 수행하지 못한 브랜드 내역입니다.<br>여기에 기록된 브랜드는 수기로 추출을 진행해야합니다.<br>해당 파일은 주 1회(월)에 전달될 예정입니다.<br>",
-        "naversettle":"※ 파일 추출경로<br>1. SettleScheduled.xlsx : 정산관리 > 정산내역 > 일별정산내역 > 조회조건값 : 정산예정일(고정) > 기간 : 1일~말일(캘랜더지정)<br>2. SettleFinish.xlsx : 정산관리 > 정산내역 > 건별정산내역 > 조회조건값 : 정산완료일 > 기간 : 1일~말일(캘랜더지정)<br>3. SettleStandard.xlsx : 정산관리 > 정산내역 > 건별정산내역 > 조회조건값 : 정산기준일 > 기간 : 1일~말일(캘랜더지정)<br>4. Report.csv : 웹사이트상 오류로 인해, 로봇이 작업을 수행하지 못한 브랜드 내역입니다.<br>여기에 기록된 브랜드는 수기로 추출을 진행해야합니다.<br>해당 파일은 월 1회 전달될 예정입니다.<br>",
-        "navercarryover":"※ 파일 추출경로<br>1. Report.csv : 웹사이트상 오류로 인해, 로봇이 작업을 수행하지 못한 브랜드 내역입니다.<br>2. SettleFinish.xlsx : 정산관리 > 정산내역 > 건별정산내역 > 조회조건값 : 정산완료일 > 기간 : 1일~15일(캘랜더지정)<br>여기에 기록된 브랜드는 수기로 추출을 진행해야합니다.<br>해당 파일은 월 1회 전달될 예정입니다.<br>",
-        "naver_client_bill":"※ 파일 추출경로<br>1. Exchange.xlsx : 판매관리 > 교환관리 > 조회조건값 : 교환요청일 > 기간 : 3개월 > 처리상태 : 교환완료<br>2. Report.csv : 웹사이트상 오류로 인해, 로봇이 작업을 수행하지 못한 브랜드 내역입니다.<br>여기에 기록된 브랜드는 수기로 추출을 진행해야합니다.<br>해당 파일은 월 1회 전달될 예정입니다.<br>반품, 취소 완료 파일은 일매출정리 결과파일로 대체 합니다.<br>"
+        "naverdaily":"※ 파일 추출경로<br>1. Delivery.xlsx : 판매관리 > 발주/발송관리 > 조회조건값 : 발송처리일 > 기간 : 1주일<br>2. Return.xlsx : 판매관리 > 반품관리 > 조회조건값 : 반품요청일 > 기간 : 3개월 > 처리상태 : 반품완료<br>3. Cancle.xlsx : 판매관리 > 취소관리 > 조회조건값 : 클레임요청일 > 기간 : 3개월 > 처리상태 : 취소완료<br>4. Report.csv : 웹사이트상 오류로 인해, 로봇이 작업을 수행하지 못한 브랜드 내역입니다.<br>Report.csv에 기록된 브랜드는 수기로 추출을 진행해야합니다.<br>해당 파일은 주 6회(월~토)에 전달될 예정입니다.<br>",
+        "naverpurchase":"※ 파일 추출경로<br>1. Decision.xlsx : 판매관리 > 구매확정내역 > 조회조건값 : 구매확정일 > 기간 : 1주일<br>2. Pay.xlsx : 판매관리 > 구매확정내역 > 조회조건값 : 결제일 > 기간 : 1주일<br>3. Report.csv : 웹사이트상 오류로 인해, 로봇이 작업을 수행하지 못한 브랜드 내역입니다.<br>Report.csv에 기록된 브랜드는 수기로 추출을 진행해야합니다.<br>해당 파일은 주 1회(월)에 전달될 예정입니다.<br>",
+        "naversettle":"※ 파일 추출경로<br>1. SettleScheduled.xlsx : 정산관리 > 정산내역 > 일별정산내역 > 조회조건값 : 정산예정일(고정) > 기간 : 1일~말일(캘랜더지정)<br>2. SettleFinish.xlsx : 정산관리 > 정산내역 > 건별정산내역 > 조회조건값 : 정산완료일 > 기간 : 1일~말일(캘랜더지정)<br>3. SettleStandard.xlsx : 정산관리 > 정산내역 > 건별정산내역 > 조회조건값 : 정산기준일 > 기간 : 1일~말일(캘랜더지정)<br>4. Report.csv : 웹사이트상 오류로 인해, 로봇이 작업을 수행하지 못한 브랜드 내역입니다.<br>Report.csv에 기록된 브랜드는 수기로 추출을 진행해야합니다.<br>해당 파일은 월 1회 전달될 예정입니다.<br>",
+        "navercarryover":"※ 파일 추출경로<br>1. Report.csv : 웹사이트상 오류로 인해, 로봇이 작업을 수행하지 못한 브랜드 내역입니다.<br>2. SettleFinish.xlsx : 정산관리 > 정산내역 > 건별정산내역 > 조회조건값 : 정산완료일 > 기간 : 1일~15일(캘랜더지정)<br>Report.csv에 기록된 브랜드는 수기로 추출을 진행해야합니다.<br>해당 파일은 월 1회 전달될 예정입니다.<br>",
+        "naver_client_bill":"※ 파일 추출경로<br>1. Exchange.xlsx : 판매관리 > 교환관리 > 조회조건값 : 교환요청일 > 기간 : 3개월 > 처리상태 : 교환완료<br>2. Report.csv : 웹사이트상 오류로 인해, 로봇이 작업을 수행하지 못한 브랜드 내역입니다.<br>Report.csv에 기록된 브랜드는 수기로 추출을 진행해야합니다.<br>해당 파일은 월 1회 전달될 예정입니다.<br>반품, 취소 완료 파일은 일매출정리 결과파일로 대체 합니다.<br>"
     },
     "moveStore":"//*[@id='_gnb_nav']/ul/li[2]/a",
     "dataCnt": "//*[@id='__app_root__']/div/div[2]/div[3]/div[1]/h3/b",
