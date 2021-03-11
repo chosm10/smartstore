@@ -62,7 +62,7 @@ def getHalfDate():
     today = date.today()
     this_month = today.replace(day=1)
     start = this_month.strftime("%Y.%m.%d")
-    this_month = today.replace(day=15)
+    this_month = today.replace(day=14)
     end = this_month.strftime("%Y.%m.%d")
     return start, end
 
