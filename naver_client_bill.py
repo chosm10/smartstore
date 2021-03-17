@@ -80,7 +80,7 @@ if __name__ == '__main__':
 
     # 메일 수신처 설정
     to = ["chosm10@hyundai-ite.com"]
-    # to.append(naver.data["email"][shop])
+    to.append(naver.data["email"][shop])
 
     try:
         mail.sendmail(to, "({}) 네이버 고객부담배송비_{}".format(day, shop), msg, files)
