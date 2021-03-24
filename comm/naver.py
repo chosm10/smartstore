@@ -77,7 +77,7 @@ def initProcess(downPath, downPath_win, shop, stores):
     #PID 번호별로 다운로드 받을 작업 디렉터리 생성
     api.mkdir("{}{}".format(downPath, pid))
     #크롬 드라이버 설정
-    options = setDriverOption(pid, downPath_win, 1) 
+    options = setDriverOption(pid, downPath_win, 0) 
     # 크롬 드라이버 생성
     driver = getDriver(pid, data["driver"], options)
 
