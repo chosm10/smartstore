@@ -18,10 +18,14 @@ def openExcel(path, sheet):
 def fileRowCheck(path):
     wb = xlrd.open_workbook(path)
     ws = wb.sheet_by_index(0)
+    rows = ws.nrows - 1
     # 컬럼명을 제외한 데이터 행 수
     if "전체주문" in path:
-        return ws.nrows - 2
-    return ws.nrows - 1
+        rows = ws.nrows - 2
+    # 파일 닫기
+    wb.release_resources()
+    
+    return rows
 
 def initExcel(excel, brand):
     # 브랜드명 컬럼 추가

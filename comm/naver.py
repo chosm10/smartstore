@@ -283,7 +283,7 @@ def downloadWait(pid, driver, task, store, limit, path, keywords):
                 log(pid, "다운로드 기간 {}초 소요!".format(second))
                 return flag
         except Exception as e:
-            storeExcept(pid, driver, task, "다운로드 저장 경로 불일치 오류 발생 | {}".format(e))
+            storeExcept(pid, driver, task, "다운로드 체크 중 오류 발생 | {}".format(e))
             return -1
 
         second += 1
