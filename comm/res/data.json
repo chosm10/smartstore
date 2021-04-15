@@ -91,7 +91,7 @@
         "naver_client_bill":"※ 파일 추출경로<br>1. Exchange.xlsx : 판매관리 > 교환관리 > 조회조건값 : 교환요청일 > 기간 : 3개월 > 처리상태 : 교환완료<br>2. Report.csv : 웹사이트상 오류로 인해, 로봇이 작업을 수행하지 못한 브랜드 내역입니다.<br>Report.csv에 기록된 브랜드는 수기로 추출을 진행해야합니다.<br>해당 파일은 월 1회 전달될 예정입니다.<br>반품, 취소 완료 파일은 일매출정리 결과파일로 대체 합니다.<br>"
     },
     "moveStore":"//*[@id='_gnb_nav']/ul/li[2]/a",
-    "dataCnt": "//*[@id='__app_root__']/div/div[2]/div[3]/div[1]/h3/b",
+    "dataCnt": "//*[@id='__app_root__']/div/div[2]/div[4]/div[1]/h3/b",
     "url":{
         "naverdaily":{
             "cancle":"https://sell.smartstore.naver.com/#/naverpay/claim/cancel",
