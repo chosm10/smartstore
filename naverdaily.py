@@ -34,7 +34,7 @@ task_name = '네이버_{}_{}'.format(naver.data["task_name"][task], naver.data["
 bot_ip = api.get_ip()
 bot_id = naver.data["bot_id"][bot_ip]
 data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'run'}
-naver.log(api.post_api(task_status_url, data))
+naver.log(0, api.post_api(task_status_url, data))
 
 def main(stores):
     # 사이트 접속, 드라이버 생성, 일감 분장, 로그인
