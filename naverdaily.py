@@ -17,12 +17,13 @@ shop = sys.argv[1]
 task = "naverdaily"
 
 # 프로그램 시작
-url = 'http://127.0.0.1:8081/api/task-log'
+url = 'http://10.108.248.148:8081/api/task-log'
 task_name = '네이버_{}_{}'.format(naver.data["task_name"][task], naver.data["shop"][shop])
 bot_ip = api.get_ip()
 bot_id = naver.data["bot_id"][bot_ip]
 data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'run'}
-api.post_api(url, data)
+print(data)
+print(api.post_api(url, data))
 
 # 프로그램 다운 경로
 downPath = "C:/Users/Administrator/Desktop/naver/"
@@ -48,9 +49,12 @@ if __name__ == '__main__':
     # 멀티 프로세싱 설정 -> 코어 수만큼 활용, 일감은 csv 파일에서 읽기    ... 코어 수를 4 초과하게 되면 홈페이지가 로봇으로 인식해서 막아버리는 이슈 발생
     num_cores = 4#multiprocessing.cpu_count()
     pool = multiprocessing.Pool(num_cores)
+
+    data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'fail'}
     try:
         stores = api.divideWork("{}\\{}".format(naver.nowPath, naver.data["workFileName"][shop]), num_cores)
     except Exception as e:
+        api.post_api(url, data)
         naver.adminLog.error("{}: 일감 분리 실패(일감 파일 읽기 불가능)".format(e))
 
     pool.map(main, stores)
@@ -68,7 +72,6 @@ if __name__ == '__main__':
         
         # 웹메일에서 첨부 메일명에 한글이 포함되면 첨부가 되지 않아서 영어 이름으로 매칭
         filename = r"{}\{}_{}_{}.xlsx".format(downPath_win, day, shop, fnames[dir])
-        data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'fail'}
         try:
             excel_concat.getResultFile(r"{}\{}".format(downPath_win, dir), filename, line, naver.adminLog, naver.userLog)
             naver.adminLog.info("{}파일 정상적으로 생성 완료".format(dir))
