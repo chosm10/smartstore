@@ -16,15 +16,6 @@ shop = sys.argv[1]
 # 업무명
 task = "naverdaily"
 
-# 프로그램 시작
-url = 'http://10.108.248.148:8081/api/task-log'
-task_name = '네이버_{}_{}'.format(naver.data["task_name"][task], naver.data["shop"][shop])
-bot_ip = api.get_ip()
-bot_id = naver.data["bot_id"][bot_ip]
-data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'run'}
-print(data)
-print(api.post_api(url, data))
-
 # 프로그램 다운 경로
 downPath = "C:/Users/Administrator/Desktop/naver/"
 # 크롬 다운로드 윈도우 경로
@@ -36,6 +27,14 @@ naver.mkdir(downPath, downPath_win, task, shop, dirs)
 # mkdir에서 할당된 다운 경로를 현재 파일 변수로 받아오는 작업
 downPath = naver.downPath
 downPath_win = naver.downPath_win
+
+# 프로그램 시작
+task_status_url = 'http://10.108.248.148:8081/api/task-log'
+task_name = '네이버_{}_{}'.format(naver.data["task_name"][task], naver.data["shop"][shop])
+bot_ip = api.get_ip()
+bot_id = naver.data["bot_id"][bot_ip]
+data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'run'}
+naver.log(api.post_api(task_status_url, data))
 
 def main(stores):
     # 사이트 접속, 드라이버 생성, 일감 분장, 로그인
@@ -50,11 +49,11 @@ if __name__ == '__main__':
     num_cores = 4#multiprocessing.cpu_count()
     pool = multiprocessing.Pool(num_cores)
 
-    data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'fail'}
+    err = False
     try:
         stores = api.divideWork("{}\\{}".format(naver.nowPath, naver.data["workFileName"][shop]), num_cores)
     except Exception as e:
-        api.post_api(url, data)
+        err = True
         naver.adminLog.error("{}: 일감 분리 실패(일감 파일 읽기 불가능)".format(e))
 
     pool.map(main, stores)
@@ -76,7 +75,7 @@ if __name__ == '__main__':
             excel_concat.getResultFile(r"{}\{}".format(downPath_win, dir), filename, line, naver.adminLog, naver.userLog)
             naver.adminLog.info("{}파일 정상적으로 생성 완료".format(dir))
         except Exception:
-            api.post_api(url, data)
+            err = True
             naver.adminLog.error("{}파일 정상적으로 생성 실패".format(dir))
         naver.setDRM(filename)
 
@@ -84,7 +83,7 @@ if __name__ == '__main__':
         try:
             isFileExist = os.path.isfile(filename)
         except Exception as e:
-            api.post_api(url, data)
+            err = True
             naver.adminLog.error("네이버 일매출정리 {}파일이 존재하지 않음 | {}".format(filename, e))
 
         # 파일이 정상적으로 생성되어 존재하면, 결과파일 메일에 첨부 파일명 등록
@@ -102,11 +101,15 @@ if __name__ == '__main__':
         mail.sendmail(to, "({}) 네이버 일매출정리_{}".format(day, shop), msg, files)
         naver.adminLog.info("네이버 일매출정리 메일 정상 발송 완료")
     except Exception as e:
-        api.post_api(url, data)
+        err = True
         naver.adminLog.error("네이버 일매출정리 메일 정상 발송 실패 | {}".format(e))
 
-    data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'comp'}
-    api.post_api(url, data)
+    if err:
+        data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'fail'}
+    else:
+        data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'comp'}
+
+    api.post_api(task_status_url, data)
     api.taskkill()
 
 ####################################################################################################################
