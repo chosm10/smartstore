@@ -5,6 +5,9 @@ import csv
 import sys
 import errno
 from datetime import date, timedelta
+import socket
+import requests
+import json
 
 def capture(pid, driver, path):
     now = time.localtime()
@@ -102,3 +105,15 @@ def taskkill():
     os.system('taskkill /f /im chromedriver.exe')
     os.system('taskkill /f /im conhost.exe')
     os.system('taskkill /f /im python.exe')
+
+def get_ip():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(('8.8.8.8', 0))
+    return s.getsockname()[0]
+
+def post_api(url, data):
+    headers = {'Content-Type': 'application/json; chearset=utf-8'}
+    # data = {'name': '네이버_일매출정리_동대문', 'botId': 1, 'botIp': '10.103.200.50', 'status':'comp'}
+    # url = 'http://127.0.0.1:8081/api/task-log'
+    res = requests.put(url, data=json.dumps(data), headers=headers)
+    return str(res.status_code) + " | " + res.text

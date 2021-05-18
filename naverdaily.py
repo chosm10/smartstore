@@ -11,16 +11,26 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
+# cmd 실행 할 때 받는 매개변수 -> 점포명   ddp = 동대문, gimpo = 김포
+shop = sys.argv[1]
+# 업무명
+task = "naverdaily"
+
+# 프로그램 시작
+url = 'http://127.0.0.1:8081/api/task-log'
+task_name = '네이버_{}_{}'.format(naver.data["task_name"][task], naver.data["shop"][shop])
+bot_ip = api.get_ip()
+bot_id = naver.data["bot_id"][bot_ip]
+data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'run'}
+api.post_api(url, data)
+
 # 프로그램 다운 경로
 downPath = "C:/Users/Administrator/Desktop/naver/"
 # 크롬 다운로드 윈도우 경로
 downPath_win = r"C:\Users\Administrator\Desktop\naver"
 
-# cmd 실행 할 때 받는 매개변수 -> 점포명   ddp = 동대문, gimpo = 김포
-shop = sys.argv[1]
 dirs = ["반품완료", "취소완료", "발주발송(발송처리일)"]
 fnames = {"반품완료":"Return", "취소완료":"Cancle", "발주발송(발송처리일)":"Delivery"}
-task = "naverdaily"
 naver.mkdir(downPath, downPath_win, task, shop, dirs)
 # mkdir에서 할당된 다운 경로를 현재 파일 변수로 받아오는 작업
 downPath = naver.downPath
@@ -58,10 +68,12 @@ if __name__ == '__main__':
         
         # 웹메일에서 첨부 메일명에 한글이 포함되면 첨부가 되지 않아서 영어 이름으로 매칭
         filename = r"{}\{}_{}_{}.xlsx".format(downPath_win, day, shop, fnames[dir])
+        data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'fail'}
         try:
             excel_concat.getResultFile(r"{}\{}".format(downPath_win, dir), filename, line, naver.adminLog, naver.userLog)
             naver.adminLog.info("{}파일 정상적으로 생성 완료".format(dir))
         except Exception:
+            api.post_api(url, data)
             naver.adminLog.error("{}파일 정상적으로 생성 실패".format(dir))
         naver.setDRM(filename)
 
@@ -69,6 +81,7 @@ if __name__ == '__main__':
         try:
             isFileExist = os.path.isfile(filename)
         except Exception as e:
+            api.post_api(url, data)
             naver.adminLog.error("네이버 일매출정리 {}파일이 존재하지 않음 | {}".format(filename, e))
 
         # 파일이 정상적으로 생성되어 존재하면, 결과파일 메일에 첨부 파일명 등록
@@ -86,8 +99,11 @@ if __name__ == '__main__':
         mail.sendmail(to, "({}) 네이버 일매출정리_{}".format(day, shop), msg, files)
         naver.adminLog.info("네이버 일매출정리 메일 정상 발송 완료")
     except Exception as e:
+        api.post_api(url, data)
         naver.adminLog.error("네이버 일매출정리 메일 정상 발송 실패 | {}".format(e))
 
+    data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'comp'}
+    api.post_api(url, data)
     api.taskkill()
 
 ####################################################################################################################

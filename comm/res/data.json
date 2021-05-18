@@ -181,5 +181,40 @@
         "standard":"정산기준일",
         "finish":"정산완료일",
         "exchange":"교환완료"
+    },
+    "bot_id":{
+        "10.103.200.50":1,
+        "10.103.200.51":2,
+        "10.103.200.52":3
+    },
+    "task_name":{
+        "naverdaily":"일매출정리",
+        "naverpurchase":"구매확정",
+        "naversettle":"정산",
+        "navercarryover":"외상매출금",
+        "naver_client_bill":"고객부담배송비"
+    },
+    "shop":{
+        "gimpo":"김포(아)",
+        "ddp":"동대문(아)",
+        "songdo":"송도(아)",
+        "garden":"가든(아)",
+        "daeguOut":"대구(아)",
+        "gasan":"가산(아)",
+        "decube":"디큐브(백)",
+        "mia":"미아(백)",
+        "head":"본점(백)",
+        "muyeog":"무역(백)",
+        "chunho":"천호(백)",
+        "sinchon":"신촌(백)",
+        "mdong":"목동(백)",
+        "jdong":"중동(백)",
+        "kintex":"킨텍스(백)",
+        "busan":"부산(백)",
+        "ulsan":"울산(백)",
+        "donggu":"동구(백)",
+        "daegu":"대구(백)",
+        "cchung":"충청(백)",
+        "pangyo":"판교(백)"
     }
 }
