@@ -1,5 +1,4 @@
 import multiprocessing
-import json
 import os
 import sys
 from comm import naver
@@ -34,7 +33,10 @@ task_name = '네이버_{}_{}'.format(naver.data["task_name"][task], naver.data["
 bot_ip = api.get_ip()
 bot_id = naver.data["bot_id"][bot_ip]
 data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'run'}
-naver.log(0, api.post_api(task_status_url, data))
+try:
+    naver.log(0, api.post_api(task_status_url, data))
+except Exception as e:
+    naver.log(0, e)
 
 def main(stores):
     # 사이트 접속, 드라이버 생성, 일감 분장, 로그인
@@ -109,7 +111,10 @@ if __name__ == '__main__':
     else:
         data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'comp'}
 
-    api.post_api(task_status_url, data)
+    try:
+        api.post_api(task_status_url, data)
+    except Exception as e:
+        naver.log(0, e)
     api.taskkill()
 
 ####################################################################################################################
