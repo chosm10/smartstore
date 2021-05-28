@@ -28,13 +28,12 @@ downPath = naver.downPath
 downPath_win = naver.downPath_win
 
 # 프로그램 시작
-task_status_url = 'http://10.108.248.148:8081/api/task-log'
 task_name = '네이버_{}_{}'.format(naver.data["task_name"][task], naver.data["shop"][shop])
 bot_ip = api.get_ip()
 bot_id = naver.data["bot_id"][bot_ip]
 data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'run'}
 try:
-    naver.log(0, api.post_api(task_status_url, data))
+    naver.log(0, api.post_api(naver.task_status_url, data))
 except Exception as e:
     naver.log(0, e)
 
@@ -112,7 +111,7 @@ if __name__ == '__main__':
         data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'comp'}
 
     try:
-        api.post_api(task_status_url, data)
+        api.post_api(naver.task_status_url, data)
     except Exception as e:
         naver.log(0, e)
     api.taskkill()
