@@ -60,7 +60,8 @@ def mkdir(downP, downP_win, task, shop, dirs):
     userLog.info("***********재다운로드 필요 항목***********")
 
 # 현재 py 파일이 있는 경로
-nowPath = "H:\\영업본부\\Naver_Common\\res"
+# nowPath = "H:\\영업본부\\Naver_Common\\res"
+nowPath = "{}\\res".format(os.path.dirname(os.path.realpath(__file__))) 
 with open(nowPath +'\\data.json', encoding='utf-8') as json_file:
     data = json.load(json_file)     
 
