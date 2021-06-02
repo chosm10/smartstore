@@ -43,4 +43,4 @@ class RunTask(Resource):
         os.system("C:\\Users\\Administrator\\rpa_naver_brandmall\\batch\\{}\\{}_{}.bat".format(task[task_name], task[task_name], shops[shop]))
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=9000)
+    app.run(debug=True, host='0.0.0.0', port=80)

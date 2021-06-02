@@ -3,3 +3,6 @@ selenium==3.141.0
 xlrd==1.2.0
 openpyxl==3.0.4
 webdriver-manager==3.2.2
+flask
+flask_restx
+flask_cors
