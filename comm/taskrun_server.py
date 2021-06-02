@@ -7,11 +7,11 @@ app = Flask(__name__)  # Flask 객체 선언, 파라미터로 어플리케이션
 CORS(app)
 api = Api(app)  # Flask 객체에 Api 객체 등록
 task = {
-    "네이버_일매출정리":"naver_daily_selling",
-    "네이버_구매확정":"naver_purchase_selling",
-    "네이버_정산":"naver_settle_selling",
-    "네이버_외상매출금":"naver_carryover",
-    "네이버_고객부담배송비":"naver_client_bill"
+    "일매출정리":"naver_daily_selling",
+    "구매확정":"naver_purchase_selling",
+    "정산":"naver_settle_selling",
+    "외상매출금":"naver_carryover",
+    "고객부담배송비":"naver_client_bill"
 }
 shops = {
         "김포(아)":"gimpo",
@@ -37,10 +37,12 @@ shops = {
         "판교(백)":"pangyo"
 }
 
-@api.route('/runtask/<string:task_name>/<string:shop>')
+@api.route('/runtask/<string:task_name>')
 class RunTask(Resource):
-    def get(self, task_name, shop):
-        os.system("C:\\Users\\Administrator\\rpa_naver_brandmall\\batch\\{}\\{}_{}.bat".format(task[task_name], task[task_name], shops[shop]))
+    def get(self, task_name):
+        # 네이버_일매출정리_동대문(아) -> ['네이버', '일매출정리', '동대문(아)']
+        task_arr = task_name.split('_')
+        os.system("C:\\Users\\Administrator\\rpa_naver_brandmall\\batch\\{}\\{}_{}.bat".format(task[task_arr[1]], task[task_arr[1]], shops[task_arr[2]]))
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=80)
+    app.run(debug=True, host='0.0.0.0', port=9000)
