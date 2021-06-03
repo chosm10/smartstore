@@ -103,7 +103,7 @@ def taskkill():
     os.system('taskkill /f /im chrome.exe')
     os.system('taskkill /f /im excel.exe')
     os.system('taskkill /f /im chromedriver.exe')
-    os.system('taskkill /f /im conhost.exe')
+    # os.system('taskkill /f /im conhost.exe')
     os.system('taskkill /f /im python.exe')
 
 def get_ip():
