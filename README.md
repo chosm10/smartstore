@@ -35,4 +35,7 @@
 ## 점포 추가 순서
 - brands_점포명.csv 생성 -> data.json 파일의 members에 계정 정보 추가 and workFileName에 해당 점포가 사용할 브랜드리스트명 추가 ->   
 - ```python brandList.py 점포명``` 으로 brands.csv에 해당 점포의 브랜드 리스트 받기 -> brands.csv 내용을 해당 점포 브랜드 리스트에 복사 / 붙여넣기 
-## 배치파일 생성 및 실행 방법
+## 네이버 정산 프로그램에서 기존 날짜 칸 설정 방법 변경
+- 기존에는 날짜칸 인식 -> readonly 해제 -> sendkey.enter로 초기화 -> sendkey(정해진날짜) 였음
+- sendkey 방식은 팝업창 같은게 발생해서 화면이 가려지면 인식이 안되는 경우 발생
+- 자바스크립트 조작 방식으로 setAttribute로 value 속성값을 직접 변경: 날짜칸 인식 -> setAttribute('value', 정해진날짜)

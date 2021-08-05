@@ -196,30 +196,34 @@ def detailJob(pid, driver, store, status):
         try:
             obj = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, naver.data[status][date])))
         except Exception as e:
-            naver.doExcept(pid, store, driver, "{} 날짜칸 인식 실패: ".format(date), e)
+            naver.doExcept(pid, store, driver, "{} 날짜칸 인식 실패: {}".format(date, naver.data[status][date]), e)
 
         naver.delay(2)
         # 읽기 전용인 기능을 없애줌
-        try:
-            driver.execute_script('arguments[0].removeAttribute("readonly")', obj)
-        except Exception as e:
-            naver.doExcept(pid, store, driver, "{} 날짜칸 readonly 기능 삭제 실패: ".format(date), e)
-            return
+        # try:
+        #     driver.execute_script('arguments[0].removeAttribute("readonly")', obj)
+        #     naver.log(pid, "리드온리 완료")
+        # except Exception as e:
+        #     naver.doExcept(pid, store, driver, "{} 날짜칸 readonly 기능 삭제 실패: ".format(date), e)
+        #     return
         # 날짜 칸 클릭하는 기능
-        try:
-            obj.send_keys(Keys.ENTER)
-        except Exception as e:
-            naver.doExcept(pid, store, driver, "{} 날짜 칸 클릭 실패: ".format(date), e)
-            return
-        # 이전에 적혀있던 날짜 삭제
-        try:
-            obj.send_keys(Keys.CONTROL + "a" + Keys.DELETE)
-        except Exception as e:
-            naver.doExcept(pid, store, driver, "{} 날짜 칸 내용 삭제 실패: ".format(date), e)
-            return
+        # try:
+        #     driver.execute_script('arguments[0].setAttribute("value", "")', obj)
+        #     naver.log(pid, "엔터치기 완료")
+        #     # obj.send_keys(Keys.ENTER)
+        # except Exception as e:
+        #     naver.doExcept(pid, store, driver, "{} 날짜 칸 클릭 실패: ".format(date), e)
+        #     return
+        # # 이전에 적혀있던 날짜 삭제
+        # try:
+        #     obj.send_keys(Keys.CONTROL + "a" + Keys.DELETE)
+        # except Exception as e:
+        #     naver.doExcept(pid, store, driver, "{} 날짜 칸 내용 삭제 실패: ".format(date), e)
+        #     return
         # 날짜 입력
         try:
-            obj.send_keys(searchDate[date])
+            driver.execute_script("arguments[0].setAttribute('value', arguments[1])", obj, searchDate[date])
+            # obj.send_keys(searchDate[date])
         except Exception as e:
             naver.doExcept(pid, store, driver, "{} 날짜 입력 실패: ".format(date), e)
             return
