@@ -147,30 +147,30 @@
         "download":"//*[@id='__app_root__']/div/div[2]/div[4]/div[1]/div/button[2]"
     },
     "scheduled":{
-        "start":"//*[@id='startDate']/input",
-        "end":"//*[@id='endDate']/input",
-        "search":"//*[@id='searchForm']/div[3]/button[1]",
-        "download":"//*[@id='content']/div/div[2]/div[10]/div[1]/div/button[2]",
-        "data":"//*[@id='content']/div/div[2]/div[10]/div[2]/div[2]/table/tbody/tr/td/span",
-        "moveButton":"//*[@id='content']/div/ul/li[1]/a"
+        "start":"//*[@id='__app_root__']/div/div[3]/div[4]/div[2]/div[1]/div/div[2]/div/div[1]/input",
+        "end":"//*[@id='__app_root__']/div/div[3]/div[4]/div[2]/div[1]/div/div[2]/div/div[2]/input",
+        "search":"//*[@id='__app_root__']/div/div[3]/div[4]/div[2]/div[2]/button[1]",
+        "download":"//*[@id='__app_root__']/div/div[3]/div[5]/div/div[1]/div[1]/div/button[2]",
+        "data":"//*[@id='__app_root__']/div/div[3]/div[5]/div/div[2]/div[1]/div[2]/div[2]/div/p",
+        "moveButton":"//*[@id='__app_root__']/div/ul/li[1]/a"
     },
     "finish":{
-        "processStatus":"//*[@id='periodType']",
-        "start":"//*[@id='startDate']/input",
-        "end":"//*[@id='endDate']/input",
-        "search":"//*[@id='searchForm']/div[3]/button[1]",
-        "download":"//*[@id='content']/div/div[2]/div[11]/div[1]/div/button[1]",
-        "data":"//*[@id='content']/div/div[2]/div[11]/div[2]/div[2]/table/tbody/tr/td/span",
-        "moveButton":"//*[@id='content']/div/ul/li[2]/a"
+        "processStatus":"//*[@id='__app_root__']/div/div[3]/div[4]/div[2]/div[1]/div[3]/div/div/div[2]/div[1]/select",
+        "start":"//*[@id='__app_root__']/div/div[3]/div[4]/div[2]/div[1]/div[3]/div/div/div[2]/div[2]/div[1]/input",
+        "end":"//*[@id='__app_root__']/div/div[3]/div[4]/div[2]/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/input",
+        "search":"//*[@id='__app_root__']/div/div[3]/div[4]/div[2]/div[2]/button[1]",
+        "download":"//*[@id='__app_root__']/div/div[3]/div[5]/div/div[1]/div[1]/div/button/span",
+        "data":"//*[@id='__app_root__']/div/div[3]/div[5]/div/div[1]/div[2]/div[1]/div/table/tbody/tr/td/span",
+        "moveButton":"//*[@id='__app_root__']/div/ul/li[2]/a"
     },
     "standard":{
-        "processStatus":"//*[@id='periodType']",
-        "start":"//*[@id='startDate']/input",
-        "end":"//*[@id='endDate']/input",
-        "search":"//*[@id='searchForm']/div[3]/button[1]",
-        "download":"//*[@id='content']/div/div[2]/div[11]/div[1]/div/button[1]",
-        "data":"//*[@id='content']/div/div[2]/div[11]/div[2]/div[2]/table/tbody/tr/td/span",
-        "moveButton":"//*[@id='content']/div/ul/li[2]/a"
+        "processStatus":"//*[@id='__app_root__']/div/div[3]/div[4]/div[2]/div[1]/div[3]/div/div/div[2]/div[1]/select",
+        "start":"//*[@id='__app_root__']/div/div[3]/div[4]/div[2]/div[1]/div[3]/div/div/div[2]/div[2]/div[1]/input",
+        "end":"//*[@id='__app_root__']/div/div[3]/div[4]/div[2]/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/input",
+        "search":"//*[@id='__app_root__']/div/div[3]/div[4]/div[2]/div[2]/button[1]",
+        "download":"//*[@id='__app_root__']/div/div[3]/div[5]/div/div[1]/div[1]/div/button/span",
+        "data":"//*[@id='__app_root__']/div/div[3]/div[5]/div/div[1]/div[2]/div[1]/div/table/tbody/tr/td/span",
+        "moveButton":"//*[@id='__app_root__']/div/ul/li[2]/a"
     },
     "statusList":{ 
         "cancle":"취소완료",
