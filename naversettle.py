@@ -48,7 +48,7 @@ def main(stores):
 #멀티프로세싱은 여기서만 조작 가능            #######################################################################
 if __name__ == '__main__':
     # 멀티 프로세싱 설정 -> 코어 수만큼 활용, 일감은 csv 파일에서 읽기    ... 코어 수를 4 초과하게 되면 홈페이지가 로봇으로 인식해서 막아버리는 이슈 발생
-    num_cores = 1#multiprocessing.cpu_count()
+    num_cores = 4#multiprocessing.cpu_count()
     pool = multiprocessing.Pool(num_cores)
 
     err = False
