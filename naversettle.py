@@ -1,5 +1,4 @@
 import multiprocessing
-import json
 import os
 import sys
 from comm import naver
@@ -10,8 +9,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver import ActionChains
 
 # 프로그램 다운 경로
 downPath = "C:/Users/Administrator/Desktop/naver/"
@@ -198,7 +195,6 @@ def detailJob(pid, driver, store, status):
     #조회 시작일, 종료일 설정
     idx = 0
     for date in searchDate:
-
         try:
             objs = WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CLASS_NAME, naver.data[status]["date"])))
             objs[idx].click()

@@ -1,5 +1,4 @@
 import multiprocessing
-import json
 import os
 import sys
 from comm import naver
@@ -10,7 +9,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 
 # 프로그램 다운 경로
 downPath = "C:/Users/Administrator/Desktop/naver/"
@@ -186,47 +184,56 @@ def detailJob(pid, driver, store, status):
             naver.log(pid, "{} 글자 선택 성공".format(text[status]))
         except Exception as e:
             naver.storeExcept(pid, driver, task, "{} 글자 선택 실패".format(text[status]))
-            return                
+            return          
+
+    common = 'react-datepicker__day--0'
     searchDate = {"start": "", "end": ""}
     searchDate["start"], searchDate["end"] = api.getHalfDate()
+    searchDate["start"] = '{}{}'.format(common, searchDate["start"].split('.')[2])
+    searchDate["end"] =  '{}{}'.format(common, searchDate["end"].split('.')[2])
 
     #조회 시작일, 종료일 설정
+    idx = 0
     for date in searchDate:
-        # 날짜 칸 인식
         try:
-            obj = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, naver.data[status][date])))
+            objs = WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CLASS_NAME, naver.data[status]["date"])))
+            objs[idx].click()
+            naver.log(pid, "{} 날짜 칸 클래스로 클릭 성공".format(date))
+            idx += 1
         except Exception as e:
-            naver.doExcept(pid, store, driver, "{} 날짜칸 인식 실패: ".format(date), e)
-
-        naver.delay(2)
-        
-        # 날짜 입력
-        try:
-            driver.execute_script("arguments[0].setAttribute('value', arguments[1])", obj, searchDate[date])
-            # obj.send_keys(searchDate[date])
-        except Exception as e:
-            naver.doExcept(pid, store, driver, "{} 날짜 입력 실패: ".format(date), e)
+            naver.doExcept(pid, store, driver, "{} 날짜 칸 클릭 실패: ".format(date), e)
             return
-        naver.delay(2)
         
-    naver.delay(3)
+        naver.delay(3)
+        try:
+            obj = WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CLASS_NAME, naver.data[status]["prev"])))
+            obj[0].click()
+            naver.log(pid, "전월 버튼 클릭")
+        except Exception as e:
+            naver.doExcept(pid, store, driver, "전월 버튼 클릭 실패", e)
+            return
+
+        naver.delay(3)
+        try:
+            obj = WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CLASS_NAME, searchDate[date])))
+            obj[0].click()
+            naver.log(pid, "달력 중 주단위 클래스 오브젝트 클래스 인식 완료")
+        except Exception as e:
+            naver.doExcept(pid, store, driver, "달력 중 주단위 클래스 오브젝트 클래스 인식 불가", e)
+            return
+
+        naver.delay(3)
+
     # 검색 버튼 클릭
     flag = naver.searchData(pid, driver, task, naver.data[status]["search"])
     if not flag:
         return
 
     naver.delay(3)
-    # 데이터 내역이 존재 하지 않음 이라는 문구가 나타나는 요소의 값을 담는 변수
-    val = ""
     try:
-        # 데이터 목록의 html 내용에 데이터가 존재하지 않음 이라는 텍스트가 나타나면 데이터 없는것으로 간주
-        exist = WebDriverWait(driver, 2).until(EC.presence_of_element_located((By.XPATH, naver.data[status]["data"])))
-        val = exist.get_attribute('innerHTML')
+        # 데이터 검색 후 조회 내역의 두번째 컬럼이 인식되는지로 데이터 존재여부 확인
+        WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, naver.data[status]["data"])))
     except Exception:
-        naver.log(pid, "조회한 데이터 내역이 존재함.")
-
-    # 데이터라는 문구가 포함되었는지 체크, 있으면 조회된 데이터가 없는 상황임
-    if "데이터" in val:
         naver.log(pid, "{} 조회 결과 데이터가 존재하지 않음.".format(task))
         return
 
