@@ -30,9 +30,9 @@
         "cchung":["ec40450", "chung1^^"],
         "pangyo":["e-sj1014", "sevencom!!"]
     },
-    "idBox":["/html/body/div[2]/div[3]/div/form/fieldset/div[1]/div[1]/span/input", "//*[@id='loginId']"],
-    "pwdBox":["/html/body/div[2]/div[3]/div/form/fieldset/div[2]/div[1]/span/input", "//*[@id='loginPassword']"],
-    "lastLogin":["/html/body/div[2]/div[3]/div/form/fieldset/input", "//*[@id='loginButton']"],
+    "idBox":["//*[@id='id']", "//*[@id='loginId']"],
+    "pwdBox":["//*[@id='pw']", "//*[@id='loginPassword']"],
+    "lastLogin":["//*[@id='log.login']", "//*[@id='loginButton']"],
     "isLogin":"//*[@id='_gnb_nav']/div/ul[1]/li[2]/a",
     "notReg":"/html/body/div[1]/div[2]/div/form/fieldset/span[1]/a",
     "imgPath":"C:/Users/Administrator/Desktop/capture/",
