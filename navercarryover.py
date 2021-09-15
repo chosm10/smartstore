@@ -205,13 +205,13 @@ def detailJob(pid, driver, store, status):
             return
         
         naver.delay(3)
-        try:
-            obj = WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CLASS_NAME, naver.data[status]["prev"])))
-            obj[0].click()
-            naver.log(pid, "전월 버튼 클릭")
-        except Exception as e:
-            naver.doExcept(pid, store, driver, "전월 버튼 클릭 실패", e)
-            return
+        # try:
+        #     obj = WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CLASS_NAME, naver.data[status]["prev"])))
+        #     obj[0].click()
+        #     naver.log(pid, "전월 버튼 클릭")
+        # except Exception as e:
+        #     naver.doExcept(pid, store, driver, "전월 버튼 클릭 실패", e)
+        #     return
 
         naver.delay(3)
         try:
