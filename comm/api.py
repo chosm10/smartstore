@@ -8,11 +8,18 @@ from datetime import date, timedelta
 import socket
 import requests
 import json
+import platform
+
+delimeter = ''
+if platform.system() == 'Windows':
+    delimeter = '\\'
+elif platform.system() == 'Linux':
+    os_type = '/'
 
 def capture(pid, driver, path):
     now = time.localtime()
     timeForm = "pid%s-%04d-%02d-%02d-%02dh-%02dm-%02ds" % (pid, now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec)
-    saveas = r"{}\{}{}".format(path, timeForm, '.png')
+    saveas = r"{}{}{}{}".format(path, delimeter, timeForm, '.png')
     try:
         driver.save_screenshot(saveas)
         print(saveas + "저장 완료")

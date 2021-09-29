@@ -12,6 +12,7 @@ from os.path import getsize
 from os import remove
 import shutil
 import os
+import platform
 # 실행 시 cmd 창 맨위에 놓으면 크롤링 시 버튼 인식 안되니 cmd 창 내려놓고 실행해야함
 ###########################################################################################################################################################################
 # 1. RPA에서는 안되는 멀티 프로세싱 기능을 적용해서 이론 상 RPA 보다 해당 PC의 코어수 만큼 병렬처리(동시에 실행)하여 시간 단축 가능                                         
@@ -21,7 +22,14 @@ import os
 # 4. 위 내용을 종합적으로 시간 단축 가능, RPA 라이선스 미사용으로 금액 절감 가능
 # 5. 파이썬 적용 시 파이썬을 배워야하고, 관리 측면에서 RPA와 파이썬을 둘 다 관리해야 한다는 단점이 있긴 함
 ###########################################################################################################################################################################
-task_status_url = 'http://10.103.200.51:8081/api/task-log'
+delimeter = ''
+if platform.system() == 'Windows':
+    delimeter = '\\'
+elif platform.system() == 'Linux':
+    os_type = '/'
+
+server_ip = 'http://10.103.200.51:8081'
+task_status_url = '{}/api/task-log'.format(server_ip)
 
 # task: 업무명(naverdaily~), shop: 점포명(ddp, gimpo ... ), dirs: 내부 작업(반품완료, 일별정산...)
 def mkdir(downP, downP_win, task, shop, dirs):
@@ -46,8 +54,8 @@ def mkdir(downP, downP_win, task, shop, dirs):
     
     global downPath_win
     downPath_win = downP_win
-    downPath_win = r"{}\{}\{}\{}\{}\{}".format(downPath_win, task, shop, api.getYear(), api.getMonth(), api.getDay())
-
+    downPath_win = r"{}{}{}{}{}{}{}{}{}{}{}".format(downPath_win, delimeter, task, delimeter, shop, delimeter, api.getYear(), delimeter, api.getMonth(), delimeter, api.getDay())
+    
     #로그 폴더 생성
     api.mkdir("{}log".format(downPath))
     # 로거 설정
@@ -61,9 +69,8 @@ def mkdir(downP, downP_win, task, shop, dirs):
     userLog.info("***********재다운로드 필요 항목***********")
 
 # 현재 py 파일이 있는 경로
-# nowPath = "H:\\영업본부\\Naver_Common\\res"
-nowPath = "{}\\res".format(os.path.dirname(os.path.realpath(__file__))) 
-with open(nowPath +'\\data.json', encoding='utf-8') as json_file:
+nowPath = r"{}{}res".format(os.path.dirname(os.path.realpath(__file__)), delimeter)
+with open(r'{}{}data.json'.format(nowPath, delimeter), encoding='utf-8') as json_file:
     data = json.load(json_file)     
 
 def initProcess(downPath, downPath_win, shop, stores):
@@ -114,7 +121,7 @@ def setDriverOption(pid, downPath_win, mode):
         options.add_argument('headless')
         options.add_argument('--disable-gpu')
 
-    options.add_experimental_option("prefs", {"download.default_directory": r"{}\{}".format(downPath_win, pid)
+    options.add_experimental_option("prefs", {"download.default_directory": r"{}{}{}".format(downPath_win, delimeter, pid)
     })
     return options
 
@@ -297,7 +304,7 @@ def downloadCheck(path, keywords):
     for fname in os.listdir(path):
         for keyword in keywords:
             if keyword in fname:
-                fname = r"{}\{}".format(path, fname)
+                fname = r"{}{}{}".format(path, delimeter, fname)
                 isDownOk = excel_concat.fileRowCheck(fname)
                 return isDownOk
     return -1
@@ -398,13 +405,13 @@ def doExcept(pid, store, driver, msg, e):
     cancleAlert(pid, driver)
     userLog.info("{} 관련 모든 업무".format(store))
     adminLog.error("PID: {} | {} | {}".format(pid, msg, e))
-    api.capture(pid, driver, r"{}\{}".format(downPath_win,"screenshot"))
+    api.capture(pid, driver, r"{}{}{}".format(downPath_win, delimeter, "screenshot"))
 
 # 여기에 걸리면 해당 브랜드의 한 작업(반품 / 취소/ 발주발송)에 대해 수기 다운 필요
 def storeExcept(pid, driver, task, msg):
     userLog.info("{}".format(task))    
     adminLog.error("PID: {} | {}".format(pid, msg))
-    api.capture(pid, driver, r"{}\{}".format(downPath_win, "screenshot"))
+    api.capture(pid, driver, r"{}{}{}".format(downPath_win, delimeter, "screenshot"))
 
 def log(pid, msg):
     adminLog.info("PID: {} | {}".format(pid, msg))
@@ -473,7 +480,7 @@ def delay(sec):
 
 def setDRM(src):
     try:
-        os.system(r'cscript .\comm\setDRM.vbs {}'.format(src)) 
+        os.system(r'cscript .{}comm{}setDRM.vbs {}'.format(delimeter, delimeter, src)) 
         adminLog.info('{}에 DRM 정상 설정 완료'.format(src))
     except Exception as e:
         adminLog.error('{}에 DRM이 설정되지 못하였습니다. | {}'.format(src, e))
