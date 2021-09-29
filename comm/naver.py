@@ -26,7 +26,7 @@ delimeter = ''
 if platform.system() == 'Windows':
     delimeter = '\\'
 elif platform.system() == 'Linux':
-    os_type = '/'
+    delimeter = '/'
 
 server_ip = 'http://10.103.200.51:8081'
 task_status_url = '{}/api/task-log'.format(server_ip)
