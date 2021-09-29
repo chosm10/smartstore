@@ -40,85 +40,6 @@ try:
 except Exception as e:
     naver.log(0, e)
 
-def main(stores):
-    # 사이트 접속, 드라이버 생성, 일감 분장, 로그인
-    driver = naver.initProcess(downPath, downPath_win, shop, stores)
-    # 메인 비즈니스 로직
-    doProcess(driver, stores)
-    driver.quit()
-
-#멀티프로세싱은 여기서만 조작 가능            #######################################################################
-if __name__ == '__main__':
-    # 멀티 프로세싱 설정 -> 코어 수만큼 활용, 일감은 csv 파일에서 읽기    ... 코어 수를 4 초과하게 되면 홈페이지가 로봇으로 인식해서 막아버리는 이슈 발생
-    num_cores = 4#multiprocessing.cpu_count()
-    pool = multiprocessing.Pool(num_cores)
-
-    err = False
-    try:
-        stores = api.divideWork(r"{}{}{}".format(naver.nowPath, naver.delimeter, naver.data["workFileName"][shop]), num_cores)
-    except Exception as e:
-        err = True
-        naver.adminLog.error("{}: 일감 분리 실패(일감 파일 읽기 불가능)".format(e))
-
-    pool.map(main, stores)
-    pool.close()
-
-    line = 0
-    day = "{}{}{}".format(api.getYear(), api.getMonth(), api.getDay())
-    files = [r"{}{}log{}{}{}".format(downPath_win, naver.delimeter, naver.delimeter, day, "_Report.csv")]
-    msg = naver.data["emailText"][task]
-    for dir in dirs:
-        if dir == "발주발송(발송처리일)":
-            line = 1
-        else:
-            line = 0
-        
-        # 웹메일에서 첨부 메일명에 한글이 포함되면 첨부가 되지 않아서 영어 이름으로 매칭
-        filename = r"{}{}{}_{}_{}.xlsx".format(downPath_win, naver.delimeter, day, shop, fnames[dir])
-        try:
-            excel_concat.getResultFile(r"{}{}{}".format(downPath_win, naver.delimeter, dir), filename, line, naver.adminLog, naver.userLog)
-            naver.adminLog.info("{}파일 정상적으로 생성 완료".format(dir))
-        except Exception:
-            err = True
-            naver.adminLog.error("{}파일 정상적으로 생성 실패".format(dir))
-        naver.setDRM(filename)
-
-        isFileExist = False
-        try:
-            isFileExist = os.path.isfile(filename)
-        except Exception as e:
-            err = True
-            naver.adminLog.error("네이버 일매출정리 {}파일이 존재하지 않음 | {}".format(filename, e))
-
-        # 파일이 정상적으로 생성되어 존재하면, 결과파일 메일에 첨부 파일명 등록
-        if isFileExist:
-            files.append(filename)
-        else:
-        # 파일이 존재하지 않으면 결과파일 메일 내용에 기재
-            msg = "<br>◈{}{}파일이 정상적으로 생성되지 못하였습니다!!! <br>".format(msg, fnames[dir])
-
-    # 메일 수신처 설정
-    to = ["chosm10@hyundai-ite.com", "cindy@hyundaihmall.com", "move@hyundai-ite.com"]
-    to.append(naver.data["email"][shop])
-
-    try:
-        mail.sendmail(to, "({}) 네이버 일매출정리_{}".format(day, shop), msg, files)
-        naver.adminLog.info("네이버 일매출정리 메일 정상 발송 완료")
-    except Exception as e:
-        err = True
-        naver.adminLog.error("네이버 일매출정리 메일 정상 발송 실패 | {}".format(e))
-
-    if err:
-        data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'fail'}
-    else:
-        data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'comp'}
-
-    try:
-        api.post_api(naver.task_status_url, data)
-    except Exception as e:
-        naver.log(0, e)
-    api.taskkill()
-
 ####################################################################################################################
 
 # 각 스토어별 일처리 하는 함수
@@ -261,3 +182,82 @@ def detailJob(pid, driver, store, status):
 
     # 여기 오면 파일이 정상 다운된 상황    
     naver.moveFile(pid, driver, task, "{}{}".format(downPath, pid), downPath, store, {"반품관리":"반품완료", "취소관리":"취소완료", "전체주문":"발주발송(발송처리일)"})
+
+def main(stores):
+    # 사이트 접속, 드라이버 생성, 일감 분장, 로그인
+    driver = naver.initProcess(downPath, downPath_win, shop, stores)
+    # 메인 비즈니스 로직
+    doProcess(driver, stores)
+    driver.quit()
+
+#멀티프로세싱은 여기서만 조작 가능            #######################################################################
+if __name__ == '__main__':
+    # 멀티 프로세싱 설정 -> 코어 수만큼 활용, 일감은 csv 파일에서 읽기    ... 코어 수를 4 초과하게 되면 홈페이지가 로봇으로 인식해서 막아버리는 이슈 발생
+    num_cores = 4#multiprocessing.cpu_count()
+    pool = multiprocessing.Pool(num_cores)
+
+    err = False
+    try:
+        stores = api.divideWork(r"{}{}{}".format(naver.nowPath, naver.delimeter, naver.data["workFileName"][shop]), num_cores)
+    except Exception as e:
+        err = True
+        naver.adminLog.error("{}: 일감 분리 실패(일감 파일 읽기 불가능)".format(e))
+
+    pool.map(main, stores)
+    pool.close()
+
+    line = 0
+    day = "{}{}{}".format(api.getYear(), api.getMonth(), api.getDay())
+    files = [r"{}{}log{}{}{}".format(downPath_win, naver.delimeter, naver.delimeter, day, "_Report.csv")]
+    msg = naver.data["emailText"][task]
+    for dir in dirs:
+        if dir == "발주발송(발송처리일)":
+            line = 1
+        else:
+            line = 0
+        
+        # 웹메일에서 첨부 메일명에 한글이 포함되면 첨부가 되지 않아서 영어 이름으로 매칭
+        filename = r"{}{}{}_{}_{}.xlsx".format(downPath_win, naver.delimeter, day, shop, fnames[dir])
+        try:
+            excel_concat.getResultFile(r"{}{}{}".format(downPath_win, naver.delimeter, dir), filename, line, naver.adminLog, naver.userLog)
+            naver.adminLog.info("{}파일 정상적으로 생성 완료".format(dir))
+        except Exception:
+            err = True
+            naver.adminLog.error("{}파일 정상적으로 생성 실패".format(dir))
+        naver.setDRM(filename)
+
+        isFileExist = False
+        try:
+            isFileExist = os.path.isfile(filename)
+        except Exception as e:
+            err = True
+            naver.adminLog.error("네이버 일매출정리 {}파일이 존재하지 않음 | {}".format(filename, e))
+
+        # 파일이 정상적으로 생성되어 존재하면, 결과파일 메일에 첨부 파일명 등록
+        if isFileExist:
+            files.append(filename)
+        else:
+        # 파일이 존재하지 않으면 결과파일 메일 내용에 기재
+            msg = "<br>◈{}{}파일이 정상적으로 생성되지 못하였습니다!!! <br>".format(msg, fnames[dir])
+
+    # 메일 수신처 설정
+    to = ["chosm10@hyundai-ite.com", "cindy@hyundaihmall.com", "move@hyundai-ite.com"]
+    to.append(naver.data["email"][shop])
+
+    try:
+        mail.sendmail(to, "({}) 네이버 일매출정리_{}".format(day, shop), msg, files)
+        naver.adminLog.info("네이버 일매출정리 메일 정상 발송 완료")
+    except Exception as e:
+        err = True
+        naver.adminLog.error("네이버 일매출정리 메일 정상 발송 실패 | {}".format(e))
+
+    if err:
+        data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'fail'}
+    else:
+        data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'comp'}
+
+    try:
+        api.post_api(naver.task_status_url, data)
+    except Exception as e:
+        naver.log(0, e)
+    api.taskkill()
