@@ -33,7 +33,7 @@ def getAdminLogger(logFileName, name):
     streamHandler = logging.StreamHandler()
     streamHandler.setFormatter(formatter)
     Logger.addHandler(streamHandler)
-    fileHandler = logging.FileHandler(logFileName)
+    fileHandler = logging.FileHandler(logFileName, encoding='cp949')
     Logger.addHandler(fileHandler)   
     fileHandler.setFormatter(formatter)
 
