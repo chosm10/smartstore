@@ -1,6 +1,8 @@
 import pandas as pd
 import os
 import xlrd
+from . import api
+
 def openExcel(path, sheet):
     excel = pd.ExcelFile(path)
     columns = excel.parse(sheet).columns
@@ -47,7 +49,7 @@ def getResultFile(src, target, line, adminLog, userLog):
     sheet = None
     # 해당 업무 엑셀 파일의 시트명 찾기, 첫번째 시트로 설정 (반품관리, 취소관리, 발주발송)
     for fname in os.listdir(src):
-        fname = r"{}\{}".format(src, fname)
+        fname = r"{}{}{}".format(src, api.delimeter, fname)
         try:
             workbook = xlrd.open_workbook(fname)
         except Exception as e:
@@ -71,7 +73,7 @@ def getResultFile(src, target, line, adminLog, userLog):
         # 오류 발생 시 로그 기록에 사용할 fname을 파일경로로 변경하기전 이름 저장    
         temp = fname    
 
-        fname = r"{}\{}".format(src, fname)
+        fname = r"{}{}{}".format(src, api.delimeter, fname)
         try:
             emp = openExcel(fname, sheet)
         except Exception as e:

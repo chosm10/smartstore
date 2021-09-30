@@ -14,7 +14,7 @@ delimeter = ''
 if platform.system() == 'Windows':
     delimeter = '\\'
 elif platform.system() == 'Linux':
-    os_type = '/'
+    delimeter = '/'
 
 def capture(pid, driver, path):
     now = time.localtime()

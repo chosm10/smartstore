@@ -1,12 +1,9 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
-from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email import encoders
 import os
-import base64
-import quopri
 from mimetypes import guess_type
 
 # to를 리스트로 주면 여러명에게 발송 가능
