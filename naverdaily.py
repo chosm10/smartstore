@@ -19,7 +19,7 @@ task = "naverdaily"
 downPath = "C:/Users/Administrator/Desktop/naver/"
 # 크롬 다운로드 윈도우 경로
 downPath_win = r"C:\Users\Administrator\Desktop\naver"
-if naver.delimeter == '/':
+if api.delimeter == '/':
     downPath = "/naver/"
     downPath_win = "/naver/"
 
@@ -198,7 +198,7 @@ if __name__ == '__main__':
 
     err = False
     try:
-        stores = api.divideWork(r"{}{}{}".format(naver.nowPath, naver.delimeter, naver.data["workFileName"][shop]), num_cores)
+        stores = api.divideWork(r"{}{}{}".format(naver.nowPath, api.delimeter, naver.data["workFileName"][shop]), num_cores)
     except Exception as e:
         err = True
         naver.adminLog.error("{}: 일감 분리 실패(일감 파일 읽기 불가능)".format(e))
@@ -208,7 +208,7 @@ if __name__ == '__main__':
 
     line = 0
     day = "{}{}{}".format(api.getYear(), api.getMonth(), api.getDay())
-    files = [r"{}{}log{}{}{}".format(downPath_win, naver.delimeter, naver.delimeter, day, "_Report.csv")]
+    files = [r"{}{}log{}{}{}".format(downPath_win, api.delimeter, api.delimeter, day, "_Report.csv")]
     msg = naver.data["emailText"][task]
     for dir in dirs:
         if dir == "발주발송(발송처리일)":
@@ -217,9 +217,9 @@ if __name__ == '__main__':
             line = 0
         
         # 웹메일에서 첨부 메일명에 한글이 포함되면 첨부가 되지 않아서 영어 이름으로 매칭
-        filename = r"{}{}{}_{}_{}.xlsx".format(downPath_win, naver.delimeter, day, shop, fnames[dir])
+        filename = r"{}{}{}_{}_{}.xlsx".format(downPath_win, api.delimeter, day, shop, fnames[dir])
         try:
-            excel_concat.getResultFile(r"{}{}{}".format(downPath_win, naver.delimeter, dir), filename, line, naver.adminLog, naver.userLog)
+            excel_concat.getResultFile(r"{}{}{}".format(downPath_win, api.delimeter, dir), filename, line, naver.adminLog, naver.userLog)
             naver.adminLog.info("{}파일 정상적으로 생성 완료".format(dir))
         except Exception:
             err = True
