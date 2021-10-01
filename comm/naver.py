@@ -80,7 +80,7 @@ def initProcess(downPath, downPath_win, shop, stores):
     #크롬 드라이버 설정
     options = setDriverOption(pid, downPath_win, 0) 
     # 크롬 드라이버 생성
-    driver = getDriver(pid, data["driver"], options)
+    driver = getDriver(pid, data["driver"][api.os_type], options)
 
     # 로그인 화면이 "네이버 아이디 로그인"이면 0, "판매자 아이디 로그인" 이면 1
     loginSelect = 0

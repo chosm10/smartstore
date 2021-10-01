@@ -10,10 +10,11 @@ import requests
 import json
 import platform
 
+os_type = platform.system()
 delimeter = ''
-if platform.system() == 'Windows':
+if os_type == 'Windows':
     delimeter = '\\'
-elif platform.system() == 'Linux':
+elif os_type == 'Linux':
     delimeter = '/'
 
 def capture(pid, driver, path):

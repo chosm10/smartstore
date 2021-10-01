@@ -1,6 +1,7 @@
 # 2020.12.21 빗버킷 이관 완료
 # Naver Smart Store Crawling
 ## 파이썬 버젼 3.X 설치
+- Windows는 C:/Users/Administrator/Desktop/chromedriver_win32/에, Linux는 /naver/chromedriver/에 운영체제별 chromedriver 설치 필요!
 ## 실행 방법
 - git에서 설치한 디렉터리에서 python 업무명(ex - naverdaily.py) 점포명(ex - ddp, gimpo) / 동일 명령어가 적힌 .bat 실행    
 ```python naverdaily.py ddp```
