@@ -113,6 +113,7 @@ def setDriverOption(pid, downPath_win, mode):
     if mode == 0:
         options.add_argument('headless')
         options.add_argument('--disable-gpu')
+        options.add_argument('window-size=1920x1080')
 
     options.add_experimental_option("prefs", {"download.default_directory": r"{}{}{}".format(downPath_win, api.delimeter, pid)
     })
