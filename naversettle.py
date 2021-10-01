@@ -117,6 +117,7 @@ def detailJob(pid, driver, store, status):
     searchDate["start"], searchDate["end"] = api.getLastDate()
     searchDate["start"] = '{}{}'.format(common, searchDate["start"].split('.')[2])
     searchDate["end"] =  '{}{}'.format(common, searchDate["end"].split('.')[2])
+    naver.log(pid, "시작일: {}, 종료일: {} 받아오기 성공".format(searchDate["start"], searchDate["end"]))
 
     #조회 시작일, 종료일 설정
     idx = 0
@@ -141,14 +142,29 @@ def detailJob(pid, driver, store, status):
 
         naver.delay(3)
         try:
+    
             obj = WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CLASS_NAME, searchDate[date])))
-            obj[0].click()
-            naver.log(pid, "달력 중 주단위 클래스 오브젝트 클래스 인식 완료")
+            naver.log(pid, "달력 중 주단위 클래스 오브젝트 클래스로 날짜칸 {} 인식 완료".format(searchDate[date]))
         except Exception as e:
-            naver.doExcept(pid, store, driver, "달력 중 주단위 클래스 오브젝트 클래스 인식 불가", e)
+            naver.doExcept(pid, store, driver, "달력 중 주단위 클래스 오브젝트 클래스로 날짜칸 {} 인식 불가".format(searchDate[date]), e)
             return
 
         naver.delay(3)
+        try:
+            if date == 'end':
+                if len(obj) >= 2:
+                    obj[1].click()
+                else:
+                    obj[0].click()
+            elif date == 'start':
+                obj[0].click()
+            naver.log(pid, "{} 클릭 완료".format(searchDate[date]))
+        except Exception as e:
+            naver.doExcept(pid, store, driver, "{} 클릭 실패".format(searchDate[date]), e)
+            return
+        
+        naver.delay(3)
+
 
     # 검색 버튼 클릭
     flag = naver.searchData(pid, driver, task, naver.data[status]["search"])
