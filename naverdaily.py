@@ -253,6 +253,8 @@ if __name__ == '__main__':
 
     if err:
         data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'fail'}
+        to = ["chosm10@kakao.com"]
+        mail.sendmail(to, "({}) 네이버 일매출정리_{}".format(day, shop), msg, None)
     else:
         data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'comp'}
 
