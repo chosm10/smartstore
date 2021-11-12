@@ -40,3 +40,4 @@
 - 기존에는 날짜칸 인식 -> readonly 해제 -> sendkey.enter로 초기화 -> sendkey(정해진날짜) 였음
 - sendkey 방식은 팝업창 같은게 발생해서 화면이 가려지면 인식이 안되는 경우 발생
 - 자바스크립트 조작 방식으로 setAttribute로 value 속성값을 직접 변경: 날짜칸 인식 -> setAttribute('value', 정해진날짜)
+지라 테스트
