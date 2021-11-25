@@ -193,7 +193,7 @@ def main(stores):
 #멀티프로세싱은 여기서만 조작 가능            #######################################################################
 if __name__ == '__main__':
     # 멀티 프로세싱 설정 -> 코어 수만큼 활용, 일감은 csv 파일에서 읽기    ... 코어 수를 4 초과하게 되면 홈페이지가 로봇으로 인식해서 막아버리는 이슈 발생
-    num_cores = 4#multiprocessing.cpu_count()
+    num_cores = 1#multiprocessing.cpu_count()
     pool = multiprocessing.Pool(num_cores)
 
     err = False
@@ -208,7 +208,13 @@ if __name__ == '__main__':
 
     line = 0
     day = "{}{}{}".format(api.getYear(), api.getMonth(), api.getDay())
-    files = [r"{}{}log{}{}{}".format(downPath_win, api.delimeter, api.delimeter, day, "_Report.csv")]
+    filename = r"{}_{}_Report.csv".format(day, shop)
+    filenames = ["{}".format(filename)]
+
+    filename = r"{}{}log{}{}".format(downPath_win, api.delimeter, api.delimeter, filename)
+    os.system('./sftp.sh {}'.format(filename))
+    naver.delay(5)
+    
     msg = naver.data["emailText"][task]
     for dir in dirs:
         if dir == "발주발송(발송처리일)":
@@ -217,14 +223,17 @@ if __name__ == '__main__':
             line = 0
         
         # 웹메일에서 첨부 메일명에 한글이 포함되면 첨부가 되지 않아서 영어 이름으로 매칭
-        filename = r"{}{}{}_{}_{}.xlsx".format(downPath_win, api.delimeter, day, shop, fnames[dir])
+        filename = r"{}_{}_{}.xlsx".format(day, shop, fnames[dir])
+        filenames.append('{}'.format(filename))
+        filename = r"{}{}{}".format(downPath_win, api.delimeter, filename)
+
         try:
             excel_concat.getResultFile(r"{}{}{}".format(downPath_win, api.delimeter, dir), filename, line, naver.adminLog, naver.userLog)
             naver.adminLog.info("{}파일 정상적으로 생성 완료".format(dir))
         except Exception:
             err = True
             naver.adminLog.error("{}파일 정상적으로 생성 실패".format(dir))
-        naver.setDRM(filename)
+        # naver.setDRM(filename)
 
         isFileExist = False
         try:
@@ -235,26 +244,38 @@ if __name__ == '__main__':
 
         # 파일이 정상적으로 생성되어 존재하면, 결과파일 메일에 첨부 파일명 등록
         if isFileExist:
-            files.append(filename)
+            # files.append(filename)
+            os.system('./sftp.sh {}'.format(filename))
+            naver.delay(5)
+            os.remove(filename)
+
         else:
         # 파일이 존재하지 않으면 결과파일 메일 내용에 기재
             msg = "<br>◈{}{}파일이 정상적으로 생성되지 못하였습니다!!! <br>".format(msg, fnames[dir])
-
+   
+    params = {
+        'subject':"({}) 네이버 일매출정리_{}".format(day, shop),
+        'to':naver.data["email"][shop],
+        'msg':msg,
+        'files':filenames
+    }
     # 메일 수신처 설정
-    to = ["chosm10@hyundai-ite.com", "cindy@hyundaihmall.com", "move@hyundai-ite.com"]
-    to.append(naver.data["email"][shop])
+    # to = ["chosm10@hyundai-ite.com", "cindy@hyundaihmall.com", "move@hyundai-ite.com"]
+    # to.append(naver.data["email"][shop])
 
-    try:
-        mail.sendmail(to, "({}) 네이버 일매출정리_{}".format(day, shop), msg, files)
-        naver.adminLog.info("네이버 일매출정리 메일 정상 발송 완료")
-    except Exception as e:
-        err = True
-        naver.adminLog.error("네이버 일매출정리 메일 정상 발송 실패 | {}".format(e))
+    # try:
+    #     mail.sendmail(to, "({}) 네이버 일매출정리_{}".format(day, shop), msg, None)
+    #     naver.adminLog.info("네이버 일매출정리 메일 정상 발송 완료")
+    # except Exception as e:
+    #     err = True
+    #     naver.adminLog.error("네이버 일매출정리 메일 정상 발송 실패 | {}".format(e))
+    
+    api.send_drm(naver.drm_server_ip, params)
 
     if err:
         data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'fail'}
-        to = ["chosm10@kakao.com"]
-        mail.sendmail(to, "({}) 네이버 일매출정리_{}".format(day, shop), msg, None)
+        # to = ["chosm10@kakao.com"]
+        # mail.sendmail(to, "({}) 네이버 일매출정리_{}".format(day, shop), msg, None)
     else:
         data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'comp'}
 

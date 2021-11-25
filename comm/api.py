@@ -125,3 +125,8 @@ def post_api(url, data):
     # url = 'http://127.0.0.1:8081/api/task-log'
     res = requests.put(url, data=json.dumps(data), headers=headers)
     return str(res.status_code) + " | " + res.text
+
+def send_drm(url, data):
+    headers = {'Content-Type': 'application/json; chearset=utf-8'}
+    res = requests.post(url, data=json.dumps(data), headers=headers)
+    return str(res.status_code) + " | " + res.text

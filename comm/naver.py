@@ -22,7 +22,7 @@ import os
 ###########################################################################################################################################################################
 server_ip = 'http://10.103.200.51:8081'
 task_status_url = '{}/api/task-log'.format(server_ip)
-
+drm_server_ip = 'http://10.103.200.52:9000/sendmail'
 # task: 업무명(naverdaily~), shop: 점포명(ddp, gimpo ... ), dirs: 내부 작업(반품완료, 일별정산...)
 def mkdir(downP, downP_win, task, shop, dirs):
     # 다운로드 경로 년월일 까지 디렉터리 생성
@@ -52,7 +52,7 @@ def mkdir(downP, downP_win, task, shop, dirs):
     api.mkdir("{}log".format(downPath))
     # 로거 설정
     adminLogPath = "{}/log/{}{}{}.log".format(downPath, api.getYear(), api.getMonth(), api.getDay())
-    userLogPath = "{}/log/{}{}{}_Report.csv".format(downPath, api.getYear(), api.getMonth(), api.getDay())
+    userLogPath = "{}/log/{}{}{}_{}_Report.csv".format(downPath, api.getYear(), api.getMonth(), api.getDay(), shop)
 
     global adminLog
     adminLog = api.getAdminLogger(adminLogPath, "{}_selling".format(task))
@@ -78,7 +78,7 @@ def initProcess(downPath, downPath_win, shop, stores):
     #PID 번호별로 다운로드 받을 작업 디렉터리 생성
     api.mkdir("{}{}".format(downPath, pid))
     #크롬 드라이버 설정
-    options = setDriverOption(pid, downPath_win, 0) 
+    options = setDriverOption(pid, downPath_win, 1) 
     # 크롬 드라이버 생성
     log(pid, "크롬 드라이버 경로: {}".format(api.os_type))
     driver = getDriver(pid, data["driver"][api.os_type], options)
@@ -153,6 +153,16 @@ def downloadExcel(pid, driver, task, xpath):
     except Exception:
         storeExcept(pid, driver, task, "엑셀 다운로드 버튼 클릭 실패")
         return False
+
+    delay(3)
+    try:
+        objs = WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CLASS_NAME, '_3S5JMDKDt7')))
+        objs[0].click()
+        log(pid, "주문정보 다운받기 팝업창의 엑셀다운 버튼 클릭 성공")
+    except Exception:
+        storeExcept(pid, driver, task, "주문정보 다운받기 팝업창의 엑셀다운 버튼 클릭 실패")
+        return False
+        
     return True
 
 def moveStore(pid, driver, store):

@@ -226,7 +226,7 @@ if __name__ == '__main__':
 
     line = 0
     day = "{}{}{}".format(api.getYear(), api.getMonth(), api.getDay())
-    files = [r"{}{}log{}{}{}".format(downPath_win, api.delimeter, api.delimeter, day, "_Report.csv")]
+    files = [r"{}{}log{}{}_{}{}".format(downPath_win, api.delimeter, api.delimeter, day, shop, "_Report.csv")]
     msg = naver.data["emailText"][task]
     for dir in dirs:
         line = 0
