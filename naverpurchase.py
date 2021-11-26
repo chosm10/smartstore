@@ -196,19 +196,28 @@ if __name__ == '__main__':
     pool.close()
 
     day = "{}{}{}".format(api.getYear(), api.getMonth(), api.getDay())
-    files = [r"{}{}log{}{}{}".format(downPath_win, api.delimeter, api.delimeter, day, "_Report.csv")]
     line = 0
+    filename = r"{}_{}_Report.csv".format(day, shop)
+    filenames = ["{}".format(filename)]
+
+    filename = r"{}{}log{}{}".format(downPath_win, api.delimeter, api.delimeter, filename)
+    os.system('./sftp.sh {}'.format(filename))
+    naver.delay(5)
+
     msg = naver.data["emailText"][task]
     for dir in dirs:
         # 웹메일에서 첨부 메일명에 한글이 포함되면 첨부가 되지 않아서 영어 이름으로 매칭
-        filename = r"{}{}{}_{}_{}.xlsx".format(downPath_win, api.delimeter, day, shop, fnames[dir])
+        filename = r"{}_{}_{}.xlsx".format(day, shop, fnames[dir])
+        filenames.append(filename)
+        filename = r"{}{}{}".format(downPath_win, api.delimeter, filename)
+
         try:
             excel_concat.getResultFile(r"{}{}{}".format(downPath_win, api.delimeter, dir), filename, line, naver.adminLog, naver.userLog)
             naver.adminLog.info("{}파일 정상적으로 생성 완료".format(dir))
         except Exception:
             err = True
             naver.adminLog.error("{}파일 정상적으로 생성 실패".format(dir))
-        naver.setDRM(filename)
+        # naver.setDRM(filename)
         isFileExist = False
         try:
             isFileExist = os.path.isfile(filename)
@@ -218,22 +227,23 @@ if __name__ == '__main__':
 
         # 파일이 정상적으로 생성되어 존재하면, 결과파일 메일에 첨부 파일명 등록
         if isFileExist:
-            files.append(filename)
+            # files.append(filename)
+            os.system('./sftp.sh {}'.format(filename))
+            naver.delay(5)
+            os.remove(filename)
+
         else:
         # 파일이 존재하지 않으면 결과파일 메일 내용에 기재
             msg = "<br>◈{}{}파일이 정상적으로 생성되지 못하였습니다!!! <br>".format(msg, fnames[dir])
 
-    # 메일 수신처 설정
-    to = ["chosm10@hyundai-ite.com", "cindy@hyundaihmall.com", "move@hyundai-ite.com"]
-    to.append(naver.data["email"][shop])
+    params = {
+        'subject':"({}) 네이버 구매확정_{}".format(day, shop),
+        'to':naver.data["email"][shop],
+        'msg':msg,
+        'files':filenames
+    }
 
-    try:
-        mail.sendmail(to, "({}) 네이버 구매확정_{}".format(day, shop), msg, files)
-        naver.adminLog.info("네이버 구매확정 메일 정상 발송 완료")
-    except Exception as e:
-        err = True
-        naver.adminLog.error("네이버 구매확정 메일 정상 발송 실패 | {}".format(e))
-
+    api.send_drm(naver.drm_server_ip, params)
     if err:
         data = {'name': task_name, 'botId': bot_id, 'botIp': bot_ip, 'status':'fail'}
     else:
