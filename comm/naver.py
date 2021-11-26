@@ -22,7 +22,7 @@ import os
 ###########################################################################################################################################################################
 server_ip = 'http://10.103.200.51:8081'
 task_status_url = '{}/api/task-log'.format(server_ip)
-drm_server_ip = 'http://10.103.200.52:9000/sendmail'
+drm_server_ip = 'http://10.103.200.117:9000/sendmail'
 # task: 업무명(naverdaily~), shop: 점포명(ddp, gimpo ... ), dirs: 내부 작업(반품완료, 일별정산...)
 def mkdir(downP, downP_win, task, shop, dirs):
     # 다운로드 경로 년월일 까지 디렉터리 생성
@@ -78,7 +78,7 @@ def initProcess(downPath, downPath_win, shop, stores):
     #PID 번호별로 다운로드 받을 작업 디렉터리 생성
     api.mkdir("{}{}".format(downPath, pid))
     #크롬 드라이버 설정
-    options = setDriverOption(pid, downPath_win, 1) 
+    options = setDriverOption(pid, downPath_win, 0) 
     # 크롬 드라이버 생성
     log(pid, "크롬 드라이버 경로: {}".format(api.os_type))
     driver = getDriver(pid, data["driver"][api.os_type], options)
