@@ -213,7 +213,7 @@ if __name__ == '__main__':
 
     filename = r"{}{}log{}{}".format(downPath_win, api.delimeter, api.delimeter, filename)
     try:
-        os.system('./sftp.sh {}'.format(filename))
+        os.system('./sftp.sh 2> /home/rpa01/rpa_naver_brandmall/sftp.log {}'.format(filename))
         naver.adminLog.info("{}파일 정상적으로 sftp전송 완료".format(filename))
     except:
         naver.adminLog.error("{}파일 정상적으로 sftp전송 실패".format(filename))
@@ -250,17 +250,17 @@ if __name__ == '__main__':
         if isFileExist:
             # files.append(filename)
             try:
-                os.system('./sftp.sh {}'.format(filename))
+                os.system('./sftp.sh 2> /home/rpa01/rpa_naver_brandmall/sftp.log {}'.format(filename))
                 naver.adminLog.info("{}파일 정상적으로 sftp전송 완료".format(filename))
             except:
                 naver.adminLog.error("{}파일 정상적으로 sftp전송 실패".format(filename))
             
             naver.delay(5)
-            try:
-                os.remove(filename)
-                naver.adminLog.info("{}파일 정상적으로 삭제 완료".format(filename))
-            except:
-                naver.adminLog.error("{}파일 정상적으로 삭제 실패".format(filename))
+            # try:
+            #     os.remove(filename)
+            #     naver.adminLog.info("{}파일 정상적으로 삭제 완료".format(filename))
+            # except:
+            #     naver.adminLog.error("{}파일 정상적으로 삭제 실패".format(filename))
         else:
         # 파일이 존재하지 않으면 결과파일 메일 내용에 기재
             msg = "<br>◈{}{}파일이 정상적으로 생성되지 못하였습니다!!! <br>".format(msg, fnames[dir])
