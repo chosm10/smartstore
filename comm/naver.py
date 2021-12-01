@@ -156,7 +156,7 @@ def downloadExcel(pid, driver, task, xpath):
 
     delay(3)
     try:
-        objs = WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CLASS_NAME, '_3S5JMDKDt7')))
+        objs = WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CLASS_NAME, '_3GRQCO8t-c')))
         objs[0].click()
         log(pid, "주문정보 다운받기 팝업창의 엑셀다운 버튼 클릭 성공")
     except Exception:
