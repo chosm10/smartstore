@@ -201,7 +201,16 @@ if __name__ == '__main__':
     filenames = ["{}".format(filename)]
 
     filename = r"{}{}log{}{}".format(downPath_win, api.delimeter, api.delimeter, filename)
-    os.system('./sftp.sh {}'.format(filename))
+    
+    home = /home/rpa01/rpa_naver_brandmall
+    # Windows면 경로 변경
+    if api.delimeter == "\\":
+        home = "."
+    try:
+        os.system('{}/sftp.sh 2> {}/sftp.log {}'.format(home, home, filename))
+        naver.adminLog.info("{}파일 정상적으로 sftp전송 완료".format(filename))
+    except Exception as e:
+        naver.adminLog.error("{}파일 정상적으로 sftp전송 실패 | {}".format(filename, e))
     naver.delay(5)
 
     msg = naver.data["emailText"][task]
@@ -228,9 +237,18 @@ if __name__ == '__main__':
         # 파일이 정상적으로 생성되어 존재하면, 결과파일 메일에 첨부 파일명 등록
         if isFileExist:
             # files.append(filename)
-            os.system('./sftp.sh {}'.format(filename))
+            try:
+                os.system('{}/sftp.sh 2> {}/sftp.log {}'.format(home, home, filename))
+                naver.adminLog.info("{}파일 정상적으로 sftp전송 완료".format(filename))
+            except Exception as e:
+                naver.adminLog.error("{}파일 정상적으로 sftp전송 실패 | {}".format(filename, e))
+            
             naver.delay(5)
-            os.remove(filename)
+            try:
+                os.remove(filename)
+                naver.adminLog.info("{}파일 정상적으로 삭제 완료".format(filename))
+            except:
+                naver.adminLog.error("{}파일 정상적으로 삭제 실패".format(filename))
 
         else:
         # 파일이 존재하지 않으면 결과파일 메일 내용에 기재

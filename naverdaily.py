@@ -212,8 +212,13 @@ if __name__ == '__main__':
     filenames = ["{}".format(filename)]
 
     filename = r"{}{}log{}{}".format(downPath_win, api.delimeter, api.delimeter, filename)
+
+    home = /home/rpa01/rpa_naver_brandmall
+    # Windows면 경로 변경
+    if api.delimeter == "\\":
+        home = "."
     try:
-        os.system('/home/rpa01/rpa_naver_brandmall//sftp.sh 2> /home/rpa01/rpa_naver_brandmall/sftp.log {}'.format(filename))
+        os.system('{}/sftp.sh 2> {}/sftp.log {}'.format(home, home, filename))
         naver.adminLog.info("{}파일 정상적으로 sftp전송 완료".format(filename))
     except Exception as e:
         naver.adminLog.error("{}파일 정상적으로 sftp전송 실패 | {}".format(filename, e))
@@ -250,7 +255,7 @@ if __name__ == '__main__':
         if isFileExist:
             # files.append(filename)
             try:
-                os.system('/home/rpa01/rpa_naver_brandmall/sftp.sh 2> /home/rpa01/rpa_naver_brandmall/sftp.log {}'.format(filename))
+                os.system('{}/sftp.sh 2> {}/sftp.log {}'.format(home, home, filename))
                 naver.adminLog.info("{}파일 정상적으로 sftp전송 완료".format(filename))
             except Exception as e:
                 naver.adminLog.error("{}파일 정상적으로 sftp전송 실패 | {}".format(filename, e))
