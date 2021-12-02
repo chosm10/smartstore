@@ -12,7 +12,7 @@ path = r'C:\Users\Administrator\Desktop\drm_need\rpa'
 class SendMail(Resource):
     def post(self):
         to = ["chosm10@kakao.com", "chosm10@hyundai-ite.com", "cindy@hyundaihmall.com", "move@hyundai-ite.com"]
-        # to.append(request.json.get('to'))
+        to.append(request.json.get('to'))
         subject = request.json.get('subject')
         msg = request.json.get('msg')
         files = request.json.get('files')
@@ -30,7 +30,7 @@ class SendMail(Resource):
                 print('{} drm 설정 실패: {}'.format(filepath, e))
         
         try:
-            subject = '테스트메일 입니다.'
+            # subject = '테스트메일 입니다.'
             mail.sendmail(to, subject, msg, attach)
             print('메일 발송 성공')
         except Exception as e:

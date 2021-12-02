@@ -150,18 +150,26 @@ def downloadExcel(pid, driver, task, xpath):
     try:
         processByXpath(pid, driver, {"xpath": xpath}, "click", 5)
         log(pid, "엑셀다운 버튼 클릭 성공")
-    except Exception:
-        storeExcept(pid, driver, task, "엑셀 다운로드 버튼 클릭 실패")
+    except Exception as e:
+        storeExcept(pid, driver, task, "엑셀 다운로드 버튼 클릭 실패 | {}".format(e))
         return False
 
-    delay(3)
-    try:
-        objs = WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CLASS_NAME, '_3GRQCO8t-c')))
-        objs[0].click()
-        log(pid, "주문정보 다운받기 팝업창의 엑셀다운 버튼 클릭 성공")
-    except Exception:
-        storeExcept(pid, driver, task, "주문정보 다운받기 팝업창의 엑셀다운 버튼 클릭 실패")
-        return False
+    checks = ["정산예정일", "정산완료일", "정산기준일"]
+    flag = True
+    for check in checks:
+        if check in task:
+            flag = False
+            break
+
+    if flag:
+        delay(3)
+        try:
+            objs = WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CLASS_NAME, '_3GRQCO8t-c')))
+            objs[0].click()
+            log(pid, "주문정보 다운받기 팝업창의 엑셀다운 버튼 클릭 성공")
+        except Exception as e:
+            storeExcept(pid, driver, task, "주문정보 다운받기 팝업창의 엑셀다운 버튼 클릭 실패 | {}".format(e))
+            return False
         
     return True
 
@@ -483,8 +491,9 @@ def delay(sec):
         adminLog.error("시간 지연 불가 오류 발생! | {}".format(e))
 
 def setDRM(src):
+    Log = api.getAdminLogger(r"C:\Users\Administrator\Desktop\naver\log", "DRM")
     try:
         os.system(r'cscript .{}comm{}setDRM.vbs {}'.format(api.delimeter, api.delimeter, src)) 
-        adminLog.info('{}에 DRM 정상 설정 완료'.format(src))
+        Log.info('{}에 DRM 정상 설정 완료'.format(src))
     except Exception as e:
-        adminLog.error('{}에 DRM이 설정되지 못하였습니다. | {}'.format(src, e))
+        Log.error('{}에 DRM이 설정되지 못하였습니다. | {}'.format(src, e))

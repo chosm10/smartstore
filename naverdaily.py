@@ -213,10 +213,10 @@ if __name__ == '__main__':
 
     filename = r"{}{}log{}{}".format(downPath_win, api.delimeter, api.delimeter, filename)
     try:
-        os.system('./sftp.sh 2> /home/rpa01/rpa_naver_brandmall/sftp.log {}'.format(filename))
+        os.system('/home/rpa01/rpa_naver_brandmall//sftp.sh 2> /home/rpa01/rpa_naver_brandmall/sftp.log {}'.format(filename))
         naver.adminLog.info("{}파일 정상적으로 sftp전송 완료".format(filename))
-    except:
-        naver.adminLog.error("{}파일 정상적으로 sftp전송 실패".format(filename))
+    except Exception as e:
+        naver.adminLog.error("{}파일 정상적으로 sftp전송 실패 | {}".format(filename, e))
     naver.delay(5)
     
     msg = naver.data["emailText"][task]
@@ -250,10 +250,10 @@ if __name__ == '__main__':
         if isFileExist:
             # files.append(filename)
             try:
-                os.system('./sftp.sh 2> /home/rpa01/rpa_naver_brandmall/sftp.log {}'.format(filename))
+                os.system('/home/rpa01/rpa_naver_brandmall/sftp.sh 2> /home/rpa01/rpa_naver_brandmall/sftp.log {}'.format(filename))
                 naver.adminLog.info("{}파일 정상적으로 sftp전송 완료".format(filename))
-            except:
-                naver.adminLog.error("{}파일 정상적으로 sftp전송 실패".format(filename))
+            except Exception as e:
+                naver.adminLog.error("{}파일 정상적으로 sftp전송 실패 | {}".format(filename, e))
             
             naver.delay(5)
             # try:
@@ -281,7 +281,7 @@ if __name__ == '__main__':
     # except Exception as e:
     #     err = True
     #     naver.adminLog.error("네이버 일매출정리 메일 정상 발송 실패 | {}".format(e))
-    
+    naver.delay(10)
     api.send_drm(naver.drm_server_ip, params)
 
     if err:
