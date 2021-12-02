@@ -213,7 +213,7 @@ if __name__ == '__main__':
 
     filename = r"{}{}log{}{}".format(downPath_win, api.delimeter, api.delimeter, filename)
 
-    home = /home/rpa01/rpa_naver_brandmall
+    home = "/home/rpa01/rpa_naver_brandmall"
     # Windows면 경로 변경
     if api.delimeter == "\\":
         home = "."
