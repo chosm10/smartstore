@@ -265,7 +265,6 @@ if __name__ == '__main__':
     params = {
         'subject':"({}) 네이버 고객부담배송비_{}".format(day, shop),
         'to':naver.data["email"][shop],
-        'to':'',
         'msg':msg,
         'files':filenames
     }

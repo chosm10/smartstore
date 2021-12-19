@@ -264,7 +264,6 @@ if __name__ == '__main__':
     params = {
         'subject':"({}) 네이버 외상매출금_{}".format(day, shop),
         'to':naver.data["email"][shop],
-        'to':'',
         'msg':msg,
         'files':filenames
     }
